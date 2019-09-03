@@ -1,8 +1,10 @@
 # Sistemas Operativos Avanzados
 
 ## Grupo: X2
+- Rodeiro, Gonzalo DNI: 37.753.908
 - Salva, Ricardo Nicolás DNI: 38.142.454
 - Soro, Emmanuel DNI: 33.778.589
+
 
 ## Proyecto: Smartfarm :seedling::electron:
 ### Descripción
