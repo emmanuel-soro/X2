@@ -1,6 +1,6 @@
 # Sistemas Operativos Avanzados
 
-## Grupo: &nbsp;X2
-- Soro, Emmanuel &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 33778589
+## Grupo: X2
+- Soro, Emmanuel DNI: 33.778.589
 
-## Proyecto: &nbsp;Smartfarm
+## Proyecto: Smartfarm
