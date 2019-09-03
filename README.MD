@@ -1,7 +1,7 @@
 # Sistemas Operativos Avanzados
 
 ## Grupo: X2
-- Salva, Ricardo Nicolás: 38.142.454
+- Salva, Ricardo Nicolás DNI: 38.142.454
 - Soro, Emmanuel DNI: 33.778.589
 
 ## Proyecto: Smartfarm :seedling::electron:
