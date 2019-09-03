@@ -2,6 +2,7 @@
 
 ## Grupo: X2
 - Soro, Emmanuel DNI: 33.778.589
+- Salva, Ricardo Nicolás: 38.142.454
 
 ## Proyecto: Smartfarm
 ### Descripción
