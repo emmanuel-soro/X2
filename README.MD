@@ -18,9 +18,25 @@ Smartfarm intenta simplificar el cuidado de las plantas, monitoreando y tomando 
 
 ### Hardware (embebido)
 * Placa Arduino UNO 
+
+![imagenPlaca](https://i.imgur.com/BDuNlqA.png)
+
+Arduino Uno es una placa electrónica basada en el microcontrolador ATmega328. Cuenta con 14 entradas/salidas digitales, de las cuales 6 se pueden utilizar como salidas PWM (Modulación por ancho de pulsos) y otras 6 son entradas analógicas. Además, incluye un resonador cerámico de 16 MHz, un conector USB, un conector de alimentación, una cabecera ICSP y un botón de reseteado. 
+
 * Cámara
-* Sensor de humedad del suelo 
-* Sensor de temperatura del ambiente
+* Sensor de humedad del suelo (Higrómetro FC-28)
+
+![imagenSensorHum](https://i.imgur.com/4vnynI5.png)
+
+El FC-28 es un sensor sencillo que mide la humedad del suelo por la variación de su conductividad. Se distribuye con una placa de medición estándar que permite obtener la medición como valor analógico o como una salida digital, activada cuando la humedad supera un cierto umbral.
+Los valores obtenidos van desde 0 sumergido en agua, a 1023 en el aire (o en un suelo muy seco). Un suelo ligeramente húmero daría valores típicos de 600-700. Un suelo seco tendrá valores de 800-1023.
+
+* Sensor de temperatura del ambiente Arduino LM35
+
+![imagenSensorTemp](https://i.imgur.com/QbLgyS2.png)
+
+El sensor de temperatura Arduino LM35 es un sensor muy económico. La salida de este sensor es analógica y el calibrado lo hace directamente en grados Celsius. La temperatura que admite oscila entre los 2º C y los 150º C. 
+
 * Sensor de nivel de agua
 * Portalamparas
 * Led con PWM
