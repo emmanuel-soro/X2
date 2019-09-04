@@ -28,4 +28,4 @@ Smartfarm intenta simplificar el cuidado de las plantas, monitoreando y tomando 
 
 ### Diagrama Funcional
 
-![diagramaFuncional](https://i.imgur.com/0fSK0n7.png)
+![diagramaFuncional](https://i.imgur.com/6XBSzXd.png)
