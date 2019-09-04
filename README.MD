@@ -38,6 +38,16 @@ Los valores obtenidos van desde 0 sumergido en agua, a 1023 en el aire (o en un 
 El sensor de temperatura Arduino LM35 es un sensor muy económico. La salida de este sensor es analógica y el calibrado lo hace directamente en grados Celsius. La temperatura que admite oscila entre los 2º C y los 150º C. 
 
 * Sensor de nivel de agua
+
+![imagenSensorAguaTanque](https://i.imgur.com/pSkGPQe.png)
+
+El sensor HC-SR04 es un sensor de distancia que utiliza transductores de ultrasonido para detectar objetos. De esta forma, lo utilizaremos para medir el nivel de agua del tanque.
+El Trigger (emisor) manda un pulso de ultrasonidos y el Echo (receptor) se encarga de recibirlo. Por lo tanto tenemos el tiempo que tarda en recibirlo y la velocidad (la del sonido). Entonces, la formula para calcular la distancia (que se encuentra en la ficha técnica) será:
+
+Distancia = (Tiempo en estado HIGH * Velocidad del sonido) / 2
+
+Se divide por 2 ya que la estamos midiendo dos veces (lo que tarda la señal en chocar con el objeto y volver).
+
 * Portalamparas
 * Led con PWM
 * Coolers
