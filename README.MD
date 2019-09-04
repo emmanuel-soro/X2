@@ -24,6 +24,24 @@ Smartfarm intenta simplificar el cuidado de las plantas, monitoreando y tomando 
 Arduino Uno es una placa electrónica basada en el microcontrolador ATmega328. Cuenta con 14 entradas/salidas digitales, de las cuales 6 se pueden utilizar como salidas PWM (Modulación por ancho de pulsos) y otras 6 son entradas analógicas. Además, incluye un resonador cerámico de 16 MHz, un conector USB, un conector de alimentación, una cabecera ICSP y un botón de reseteado. 
 
 * Cámara
+
+* Módulo Bluetooth HC06
+
+![imagenModuloBluetooth](https://i.imgur.com/q6kc8FV.png)
+
+Para comunicarnos con nuestro arduino UNO mediante Bluetooth utilizaremos un módulo HC-06 (esclavo, es decir, no puede conectarse a otros dispositivos por sí mismo). Con este modulo podemos conectar Arduino a otro sistema (teléfono inteligente, computadora o otros microcontroladores) para enviar y recibir datos. 
+
+El módulo Bluetooth HC-06 tiene 4 pins para establecer la conexión:
+
+  -Alimentación VCC pin. Normalmente conectado al pin 5V del Arduino.
+
+  -Masa GND. Normalmente conectado al pin GND del Arduino.
+
+  -Pin de recepción RX. Normalmente conectado al pin de transmisión Arduino (TX)
+
+  -Pin de transmisión TX. Normalmente conectado al pin de recepción Arduino (RX)
+
+
 * Sensor de humedad del suelo (Higrómetro FC-28)
 
 ![imagenSensorHum](https://i.imgur.com/4vnynI5.png)
