@@ -9,7 +9,12 @@
 
 ## Proyecto: Smartfarm :seedling::electron:
 ### Descripción
-Smartfarm intenta simplificar el cuidado de las plantas, monitoreando y tomando decisiones en tiempo real para el cuidado de las mismas.
+Smartfarm intenta automatizar el cuidado de las plantas, monitoreando y tomando decisiones en tiempo real para el cuidado de las mismas interactuando con el usuario a través de una aplicación mobile.
+En este proyecto se tendran en cuenta las siguientes consideraciones:
+  1. Sistema central de control (interaccion de HW y SF)
+  2. Sistema de iluminación
+  3. Sistema de regado
+  4. Monitoreo de crecimiento  
 
 ### Materiales
 * Maceta
