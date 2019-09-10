@@ -67,4 +67,4 @@ Se divide por 2 ya que la estamos midiendo dos veces (lo que tarda la señal en 
 
 ### Diagrama Funcional
 
-![diagramaFuncional](https://i.imgur.com/4DbCtB7.png)
+![diagramaFuncional](https://i.imgur.com/28VfvVd.png)
