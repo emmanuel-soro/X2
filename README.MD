@@ -30,22 +30,12 @@ Arduino Uno es una placa electrónica basada en el microcontrolador ATmega328. C
 
 * Cámara
 
-* Módulo Bluetooth HC06
+* Módulo Red W5100
 
-![imagenModuloBluetooth](https://i.imgur.com/q6kc8FV.png)
+![imagenRed](https://i.imgur.com/Cxsl3RF.png)
 
-Para comunicarnos con nuestro arduino UNO mediante Bluetooth utilizaremos un módulo HC-06 (esclavo, es decir, no puede conectarse a otros dispositivos por sí mismo). Con este modulo podemos conectar Arduino a otro sistema (teléfono inteligente, computadora o otros microcontroladores) para enviar y recibir datos. 
-
-El módulo Bluetooth HC-06 tiene 4 pins para establecer la conexión:
-
-  -Alimentación VCC pin. Normalmente conectado al pin 5V del Arduino.
-
-  -Masa GND. Normalmente conectado al pin GND del Arduino.
-
-  -Pin de recepción RX. Normalmente conectado al pin de transmisión Arduino (TX)
-
-  -Pin de transmisión TX. Normalmente conectado al pin de recepción Arduino (RX)
-
+El W5100 es un controlador de Ethernet fabricado por Wiznet especialmente diseñado para aplicaciones embebidas. Podemos emplear este controlador con un procesador como Arduino para implementar comunicación por internet.
+Incluye una pila de TCP/IP por hardware y buffer interno de 16Kbytes para Tx/Rx. Esto permite liberar de estas tareas al procesador, siendo una de sus principales ventajas frente a otros controladores de Ethernet como el ENC28J60.
 
 * Sensor de humedad del suelo (Higrómetro FC-28)
 
