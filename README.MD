@@ -19,6 +19,9 @@ En este proyecto se tendran en cuenta las siguientes consideraciones:
 ### Materiales
 * Maceta
 *	Bomba de agua
+
+![imagenBomba](https://i.imgur.com/rVQ10FG.png)
+
 * Pecera 
 
 ### Hardware (embebido)
@@ -61,9 +64,26 @@ Distancia = (Tiempo en estado HIGH * Velocidad del sonido) / 2
 
 Se divide por 2 ya que la estamos midiendo dos veces (lo que tarda la señal en chocar con el objeto y volver).
 
-* Portalamparas
 * Led con PWM
+
 * Coolers
+
+![imagenCooler](https://i.imgur.com/OGovQMG.png)
+
+Para disminuir la temperatura dentro de la pecera, utilizaremos un Cooler genérico.
+
+* Fuente 12v 5a Switching
+
+![imagenFuente](https://i.imgur.com/ICGIBaO.png)
+
+Para alimentar el sistema utilizaremos una fuente con las siguientes características:
+- Fusible interno electrónico que evita la sobrecarga de la fuente.
+- Entrada: 100-240V Automática 50/60 Hz.
+- Carcasa Ignífuga.
+- Conector: 5.5 x 2.1 mm.
+- Voltaje de Salida: 12 Vcc.
+- Dimensiones: 110 x 53 x 32 mm.
+- Longitud de cable: 1 mts.
 
 ### Diagrama Funcional
 
