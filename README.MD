@@ -22,7 +22,13 @@ En este proyecto se tendran en cuenta las siguientes consideraciones:
 
 ![imagenBomba](https://i.imgur.com/rVQ10FG.png)
 
-* Pecera 
+* Pecera Acrilica
+
+![imagenPecera](https://i.imgur.com/JgQzCvf.png)
+
+Alto: 35cm
+Ancho: 20cm
+Largo: 70cm
 
 ### Hardware (embebido)
 * Placa Arduino UNO 
@@ -64,7 +70,9 @@ Distancia = (Tiempo en estado HIGH * Velocidad del sonido) / 2
 
 Se divide por 2 ya que la estamos midiendo dos veces (lo que tarda la señal en chocar con el objeto y volver).
 
-* Led con PWM
+* Placa Led con PWM
+
+![imagenPlacaLed](https://i.imgur.com/luzOgDl.png)
 
 * Coolers
 
