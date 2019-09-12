@@ -59,7 +59,7 @@ Para alimentar el sistema utilizaremos una fuente con las siguientes caracterís
 - Dimensiones: 110 x 53 x 32 mm.
 - Longitud de cable: 1 mts.
 
-* Sensor de Luz x2
+* Sensor de Luz x4
 
 ![imagenSensorLuz](https://i.imgur.com/hwoIgQL.png)
 
@@ -71,8 +71,8 @@ Por tanto, un fotoresistor disminuye su resistencia a medida que aumenta la luz 
 
 ### Diagrama Funcional
 
-![diagramaFuncional](https://i.imgur.com/QA1zPLK.png)
+![diagramaFuncional](https://i.imgur.com/EbUnzOe.png)
 
 ### Diagrama Físico
 
-![diagramaFisico](https://i.imgur.com/hvaJhcf.png)
+![diagramaFisico](https://i.imgur.com/WfSehHu.png)
