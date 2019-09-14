@@ -28,12 +28,17 @@ Largo: 70cm
 
 Arduino Uno es una placa electrónica basada en el microcontrolador ATmega328. Cuenta con 14 entradas/salidas digitales, de las cuales 6 se pueden utilizar como salidas PWM (Modulación por ancho de pulsos) y otras 6 son entradas analógicas. Además, incluye un resonador cerámico de 16 MHz, un conector USB, un conector de alimentación, una cabecera ICSP y un botón de reseteado. 
 
+* Módulo Red W5100
+
+![imagenRed](https://i.imgur.com/Cxsl3RF.png)
+
+El W5100 es un controlador de Ethernet fabricado por Wiznet especialmente diseñado para aplicaciones embebidas. Podemos emplear este controlador con un procesador como Arduino para implementar comunicación por internet.
+Incluye una pila de TCP/IP por hardware y buffer interno de 16Kbytes para Tx/Rx. Esto permite liberar de estas tareas al procesador, siendo una de sus principales ventajas frente a otros controladores de Ethernet como el ENC28J60.
+
 * Cámara Voltek IP8133
 
 ![imagenCamaraFrontal](https://i.imgur.com/6mES8IZ.png)
 ![imagenCamaraTrasera](https://i.imgur.com/yVQaOoq.png)
-
-* Módulo 
 
 * Led con PWM
 
