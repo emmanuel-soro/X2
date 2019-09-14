@@ -13,9 +13,9 @@ SmartFarm pretende monitorear el crecimiento de las plantas en cuanto a su folla
 
 ### Materiales
 
-* Pecera Acrilica/Madera
+* Pecera FibroFacil/Madera
 
-![imagenPecera](https://i.imgur.com/JgQzCvf.png)
+![imagenPecera](https://i.imgur.com/W75Drq4.png)
 
 Alto: 35cm
 Ancho: 20cm
@@ -35,10 +35,22 @@ Arduino Uno es una placa electrónica basada en el microcontrolador ATmega328. C
 El W5100 es un controlador de Ethernet fabricado por Wiznet especialmente diseñado para aplicaciones embebidas. Podemos emplear este controlador con un procesador como Arduino para implementar comunicación por internet.
 Incluye una pila de TCP/IP por hardware y buffer interno de 16Kbytes para Tx/Rx. Esto permite liberar de estas tareas al procesador, siendo una de sus principales ventajas frente a otros controladores de Ethernet como el ENC28J60.
 
-* Cámara Voltek IP8133
+* Cámara Vivotek IP8133
 
 ![imagenCamaraFrontal](https://i.imgur.com/6mES8IZ.png)
 ![imagenCamaraTrasera](https://i.imgur.com/yVQaOoq.png)
+
+Carácteristicas:
+
+-Image Sensor 1/4" Progressive CMOS
+
+-Max. Resolution 1280x800 (1MP)
+
+-Lens Type Fixed-focal
+
+-Focal Length f = 3.45 mm
+
+-Aperture F2.4
 
 * Led con PWM x8
 
