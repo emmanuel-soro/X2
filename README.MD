@@ -40,9 +40,18 @@ Incluye una pila de TCP/IP por hardware y buffer interno de 16Kbytes para Tx/Rx.
 ![imagenCamaraFrontal](https://i.imgur.com/6mES8IZ.png)
 ![imagenCamaraTrasera](https://i.imgur.com/yVQaOoq.png)
 
-* Led con PWM
+* Led con PWM x8
 
-![imagenPlacaLed](https://i.imgur.com/luzOgDl.png)
+![imagenLed](https://i.imgur.com/MTJZ4PK.png)
+
+Un LED es un tipo particular de diodo que emite luz al ser atravesado por una corriente eléctrica.
+Un diodo es una unión de dos materiales semiconductores con dopados distintos. Esta diferencia de dopado hace que genere una barrera de potencial, que como primera consecuencia hace que el paso de corriente en uno de los sentidos no sea posible.
+Entonces, los diodos tienen polaridad, es decir, solo dejan pasar la corriente en un sentido.
+La patilla larga debe ser conectada al voltaje positivo (ánodo), y la corta al voltaje negativo (cátodo).
+
+Para calibrar la intensidad de los led utilizaremos PWM (Pulse Width Modulation). Lo que hace este tipo de señal es emitir, en lugar de una señal continua de salida,  es generar una serie de pulsos que se pueden variar en su duración pero a frecuencia constante. Así, la tensión promedio resultante es directamente proporcional a la duración de los pulsos dentro del rango del periodo indicado. Esto es, cuanto más juntos estén esos pulsos de +5v, mayor será la tensión promedio de nuestra salida, y cuanto más distantes sean estos, menor será la tensión.
+
+![imagenPWM](https://i.imgur.com/xi4ujKd.png)
 
 * Fuente 12v 5a Switching
 
