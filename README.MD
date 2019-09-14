@@ -11,11 +11,6 @@
 ### Descripción
 SmartFarm pretende monitorear el crecimiento de las plantas en cuanto a su follaje y a su tronco/tallo, mediante procesamiento de imagenes, y reportar estadísticas del crecimiento en base a los datos obtenidos a la aplicación mobile desarrollada en android.
 
-En este proyecto se tendran en cuenta las siguientes consideraciones:
-  1. Sistema central de control (interaccion de HW y SF)
-  2. Sistema de control de iluminación
-  3. Sistema de procesamiento de imagenes  
-
 ### Materiales
 
 * Pecera Acrilica/Madera
@@ -35,7 +30,8 @@ Arduino Uno es una placa electrónica basada en el microcontrolador ATmega328. C
 
 * Cámara Voltek IP8133
 
-
+![imagenCamaraFrontal](https://i.imgur.com/01uO4tY.png)
+![imagenCamaraTrasera](https://i.imgur.com/IInZQbY.png)
 
 * Módulo 
 
@@ -65,6 +61,10 @@ Un fotoresistor, o LDR (light-dependent resistor) es un dispositivo cuya resiste
 Su funcionamiento se basa en el efecto fotoeléctrico. Un fotorresistor está hecho de un semiconductor de alta resistencia como el sulfuro de cadmio (Cds). Si la luz que incide en el dispositivo es de alta frecuencia, los fotones son absorbidos por las elasticidades del semiconductor dando a los electrones la suficiente energía para saltar la banda de conducción. El electrón libre que resulta, y su hueco asociado, conducen la electricidad, de tal modo que disminuye la resistencia. Los valores típicos varían entre 1 MΩ, o más, en la oscuridad y 100 Ω con luz brillante.
 
 Las células de sulfuro del cadmio se basan en la capacidad del cadmio de variar su resistencia según la cantidad de luz que incide en la célula. Cuanta más luz incide, más baja es la resistencia. Las células son también capaces de reaccionar a una amplia gama de frecuencias, incluyendo infrarrojo (IR), luz visible, y ultravioleta (UV).
+
+### Diagrama de Arquitectura General
+
+![diagramaArq](https://i.imgur.com/OxN4loy.png)
 
 ### Diagrama Funcional
 
