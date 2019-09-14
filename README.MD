@@ -30,8 +30,8 @@ Arduino Uno es una placa electrónica basada en el microcontrolador ATmega328. C
 
 * Cámara Voltek IP8133
 
-![imagenCamaraFrontal](https://i.imgur.com/01uO4tY.png)
-![imagenCamaraTrasera](https://i.imgur.com/IInZQbY.png)
+![imagenCamaraFrontal](https://i.imgur.com/6mES8IZ.png)
+![imagenCamaraTrasera](https://i.imgur.com/yVQaOoq.png)
 
 * Módulo 
 
