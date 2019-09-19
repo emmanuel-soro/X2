@@ -99,3 +99,9 @@ Las células de sulfuro del cadmio se basan en la capacidad del cadmio de variar
 ### Diagrama Físico
 
 ![diagramaFisico](https://i.imgur.com/WfSehHu.png)
+
+### Prototipo 1:
+
+Este primer prototipo resulta bastante simple, pero necesario para tener una primera aproximación. Consiste en hacer funcionar dos luces LED conectandolas a la placa Arduino UNO.
+
+![imagenProt1](https://i.imgur.com/pNulxLQ.png)
