@@ -105,3 +105,9 @@ Las células de sulfuro del cadmio se basan en la capacidad del cadmio de variar
 Este primer prototipo resulta bastante simple, pero necesario para tener una primera aproximación. Consiste en hacer funcionar dos luces LED conectandolas a la placa Arduino UNO.
 
 ![imagenProt1](https://i.imgur.com/pNulxLQ.png)
+
+### Prototipo 2:
+
+Este prototipo consiste en realizar el circuito necesario para poder leer los datos de un sensor de luz (LDR). Utilizamos una protoboard, una resistencia, un sensor de luz y la placa arduino UNO.
+
+![imagenProt2](https://i.imgur.com/DGJl7Tv.png)
