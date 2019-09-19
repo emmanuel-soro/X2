@@ -108,6 +108,6 @@ Este primer prototipo resulta bastante simple, pero necesario para tener una pri
 
 ### Prototipo 2:
 
-Este prototipo consiste en realizar el circuito necesario para poder leer los datos de un sensor de luz (LDR). Utilizamos una protoboard, una resistencia, un sensor de luz y la placa arduino UNO.
+Este prototipo consiste en realizar el circuito necesario para poder obtener la información captada por un sensor de luz (LDR). Utilizamos una protoboard, una resistencia, un sensor de luz y la placa arduino UNO.
 
 ![imagenProt2](https://i.imgur.com/DGJl7Tv.png)
