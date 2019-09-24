@@ -11,6 +11,14 @@
 ### Descripción
 SmartFarm pretende monitorear el crecimiento de las plantas en cuanto a su follaje y a su tronco/tallo, mediante procesamiento de imagenes, y reportar estadísticas del crecimiento en base a los datos obtenidos a la aplicación mobile desarrollada en android.
 
+El follaje de una planta es un termino que se utiliza para designar al conjunto de ramas cargadas de hojas, flores y frutos.
+Puede ser:
+- *Aplanado*: Cuando las hojas abiertas se extienden de uno y otro lado sobre el mismo plano.
+- *Redondo o Cilíndrico*: Cuando las hojas se extienden alrededor de las ramas.
+- *Cruzado*: Cuando las ramas presentan las hojas opuestas.
+
+El tallo es el organo de la planta que sostiene a las hojas, flores y frutos. En la mayoría de las plantas, tiene características cilíndricas. En este proyecto, se reconocerá, mediante el procesamiento de imagenes tomadas con la cámara, el diámetro aproximado del tallo epígeo (tallos que crecen por encima de la tierra). 
+
 ### Materiales
 
 * Pecera FibroFacil/Madera
@@ -111,3 +119,6 @@ Este primer prototipo resulta bastante simple, pero necesario para tener una pri
 Este prototipo consiste en realizar el circuito necesario para poder obtener la información captada por un sensor de luz (LDR). Utilizamos una protoboard, una resistencia, un sensor de luz y la placa arduino UNO.
 
 ![imagenProt2](https://i.imgur.com/DGJl7Tv.png)
+
+### Prototipo 3:
+
