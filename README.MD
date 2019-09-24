@@ -133,3 +133,8 @@ En el anterior prototipo surgió el problema de que la potencia máxima que podi
 
 ![imagenProt4](https://i.imgur.com/qQUow4z.png)
 
+### Prototipo 5:
+
+Aquí incorporamos la estructura, comenzamos trabajando con una caja de carton en la cual añadimos el prototipo 4, cambiando las leds por una tira de luces led para poder obtener una luz más potente.
+
+![imagenProt5](https://i.imgur.com/r1Hrp9p.png)
