@@ -17,7 +17,7 @@ Puede ser:
 - *Redondo o Cilíndrico*: Cuando las hojas se extienden alrededor de las ramas.
 - *Cruzado*: Cuando las ramas presentan las hojas opuestas.
 
-El tallo es el organo de la planta que sostiene a las hojas, flores y frutos. En la mayoría de las plantas, tiene características cilíndricas. En este proyecto, se reconocerá, mediante el procesamiento de imagenes tomadas con la cámara, el diámetro aproximado del tallo epígeo (tallos que crecen por encima de la tierra). 
+El tallo es el órgano de la planta que sostiene a las hojas, flores y frutos. En la mayoría de las plantas, tiene características cilíndricas. En este proyecto, se reconocerá, mediante el procesamiento de imagenes tomadas con la cámara, el diámetro aproximado del tallo epígeo (tallos que crecen por encima de la tierra). 
 
 ### Materiales
 
@@ -121,4 +121,14 @@ Este prototipo consiste en realizar el circuito necesario para poder obtener la 
 ![imagenProt2](https://i.imgur.com/DGJl7Tv.png)
 
 ### Prototipo 3:
+
+Aquí integramos el prototipo 1 junto al prototipo 2. Logramos obtener los datos leídos por el sensor de luz y en base a ellos, poder controlar la potencia que reciben las luces led mediante PWM.
+
+![imagenProt3](https://i.imgur.com/e31PIQM.png)
+
+### Prototipo 4:
+
+En el anterior prototipo surgió el problema de que la potencia máxima que podiamos enviar con la placa arduino UNO era insuficiente, por lo que decidimos agregar una fuente externa para poder brindar una mayor potencia a las luces led.
+
+![imagenProt4](https://i.imgur.com/qQUow4z.png)
 
