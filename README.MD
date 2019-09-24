@@ -99,15 +99,15 @@ Las células de sulfuro del cadmio se basan en la capacidad del cadmio de variar
 
 ### Diagrama de Arquitectura General
 
-![diagramaArq](https://i.imgur.com/OxN4loy.png)
+![diagramaArq](https://i.imgur.com/9XhiX9q.png)
 
 ### Diagrama Funcional
 
-![diagramaFuncional](https://i.imgur.com/EbUnzOe.png)
+![diagramaFuncional](https://i.imgur.com/VpZrad5.png)
 
 ### Diagrama Físico
 
-![diagramaFisico](https://i.imgur.com/WfSehHu.png)
+![diagramaFisico](https://i.imgur.com/iCfC6nP.png)
 
 ### Prototipo 1:
 
