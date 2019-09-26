@@ -36,7 +36,7 @@ Largo: 70cm
 
 Arduino Uno es una placa electrónica basada en el microcontrolador ATmega328. Cuenta con 14 entradas/salidas digitales, de las cuales 6 se pueden utilizar como salidas PWM (Modulación por ancho de pulsos) y otras 6 son entradas analógicas. Además, incluye un resonador cerámico de 16 MHz, un conector USB, un conector de alimentación, una cabecera ICSP y un botón de reseteado. 
 
-* Módulo Wifi ESP 01
+* Módulo Wifi Nodemcu
 
 ![imagenRed](https://i.imgur.com/HoLEFmk.png)
 
@@ -99,15 +99,15 @@ Las células de sulfuro del cadmio se basan en la capacidad del cadmio de variar
 
 ### Diagrama de Arquitectura General
 
-![diagramaArq](https://i.imgur.com/9XhiX9q.png)
+![diagramaArq](https://i.imgur.com/iRVFk6D.png)
 
 ### Diagrama Funcional
 
-![diagramaFuncional](https://i.imgur.com/VpZrad5.png)
+![diagramaFuncional](https://i.imgur.com/pkd6tvP.png)
 
 ### Diagrama Físico
 
-![diagramaFisico](https://i.imgur.com/iCfC6nP.png)
+![diagramaFisico](https://i.imgur.com/hlbJIqY.png)
 
 ### Prototipo 1:
 
