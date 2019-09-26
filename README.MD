@@ -38,11 +38,12 @@ Arduino Uno es una placa electrónica basada en el microcontrolador ATmega328. C
 
 * Módulo Wifi Nodemcu
 
-![imagenRed](https://i.imgur.com/HoLEFmk.png)
+![imagenRed](https://i.imgur.com/8OSpDaY.png)
 
-Está basado en el SoC (System on Chip) ESP8266, un chip altamente integrado, diseñado para las necesidades de un mundo conectado. Integra un potente procesador con Arquitectura de 32 bits y conectividad Wifi. Ofrece una completa y autocontenida solución WiFi Networking, permitiéndole trabajar como host de aplicaciones o reducir la carga de WiFi Networking de otro procesador. El modulo puede trabajar en 2 modos: como estación Wifi (Wifi Station) o como Punto de Acceso (Access Point/Gateway), al trabajar como estación el módulo se conecta a la red Wifi presente en nuestro hogar. El modo Access Point se usa si queremos crear una red propia en el chip y asi conectarnos directamente. 
-
+Está basado en el SoC (System on Chip) ESP8266, un chip altamente integrado, diseñado para las necesidades de un mundo conectado. Integra un potente procesador con Arquitectura de 32 bits y conectividad Wifi. Ofrece una completa y autocontenida solución WiFi Networking, permitiéndole trabajar como host de aplicaciones o reducir la carga de WiFi Networking de otro procesador.
+La gran ventaja de este desarrollo con respecto al resto de módulos básicos de ESP8266, es que su programación se hace totalmente transparente, al no requerir ningún cambio en sus pines para la programación, y disponer de conexión USB al igual que Arduino
 El módulo ESP-01 viene cargado de fabrica con el firmware AT, que permite conectar un Arduino a wifi utilizando comandos AT.
+
 
 * Cámara Vivotek IP8133
 
