@@ -98,6 +98,12 @@ Su funcionamiento se basa en el efecto fotoeléctrico. Un fotorresistor está he
 
 Las células de sulfuro del cadmio se basan en la capacidad del cadmio de variar su resistencia según la cantidad de luz que incide en la célula. Cuanta más luz incide, más baja es la resistencia. Las células son también capaces de reaccionar a una amplia gama de frecuencias, incluyendo infrarrojo (IR), luz visible, y ultravioleta (UV).
 
+* Regulador de tensión 12V
+
+![imagenTransistor](https://i.imgur.com/76nk9LJ.png)
+
+Un regulador de tensión o regulador de voltaje es un dispositivo electrónico diseñado para mantener un nivel de tensión constante. Utilizaremos reguladores de tensión para lograr variar la potencia que llega a las luces LED mediante PWM.
+
 ### Diagrama de Arquitectura General
 
 ![diagramaArq](https://i.imgur.com/iRVFk6D.png)
