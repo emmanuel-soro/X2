@@ -47,20 +47,23 @@ El módulo ESP-01 viene cargado de fabrica con el firmware AT, que permite conec
 
 * Cámara Vivotek IP8133
 
-![imagenCamaraFrontal](https://i.imgur.com/6mES8IZ.png)
-![imagenCamaraTrasera](https://i.imgur.com/yVQaOoq.png)
+![imagenCamaraFrontal](https://i.imgur.com/FMJxtRJ.png)
+
+Target Eyeball Dome es una cámara de red para exteriores equipada con un filtro automático de corte IR y un LED IR para vigilancia diurna y nocturna. La cámara se adhiere a los estándares IP67. La cámara es compatible con el códec de video H.265 para lograr una mejor relación de compresión al tiempo que mantiene imágenes de alta calidad con anchos de banda de red reducidos. Con su WDR Pro, puede procesar escenas con una intensidad de luces contrastante y producir una imagen clara.
 
 Carácteristicas:
 
--Image Sensor 1/4" Progressive CMOS
+-Modelo             EBD4700
 
--Max. Resolution 1280x800 (1MP)
+-Iris               fijo
 
--Lens Type Fixed-focal
+-Longitud focal     2.8 mm
 
--Focal Length f = 3.45 mm
+-FOV horizontal     100 °
 
--Aperture F2.4
+-Apertura máxima    F / 2.0
+
+-Formato de imagen  1/3 "
 
 * Led con PWM x8
 
@@ -103,6 +106,12 @@ Las células de sulfuro del cadmio se basan en la capacidad del cadmio de variar
 ![imagenTransistor](https://i.imgur.com/76nk9LJ.png)
 
 Un regulador de tensión o regulador de voltaje es un dispositivo electrónico diseñado para mantener un nivel de tensión constante. Utilizaremos reguladores de tensión para lograr variar la potencia que llega a las luces LED mediante PWM.
+
+* Batería 12 v
+
+![imagenBat](https://i.imgur.com/QJO5bhb.png)
+
+Utilizaremos una batería como fuente de energía externa para poder alimentar de manera correcta a las luces LED.
 
 ### Diagrama de Arquitectura General
 
