@@ -1,32 +1,48 @@
-const int ledPIN = 3;
-const int ledPIN2 = 5;
 
-int ledLDR = A3;
-int ledLDR2 = A2;
+/****************************************************************************
+  --------------------------------------------------------------------------
+  | Proyecto      : Smart Farm
+  | Actualizado   : 28/09/2019
+  | Tema          : Arduino 
+  | Autores       : ~ Frattini, Maximiliano Gabriel (DNI: 26.849.323)
+  |                 ~ Rodeiro, Gonzalo (DNI: 37.753.908)
+  |                 ~ Salva, Ricardo Nicolás (DNI: 38.142.454)
+  |                 ~ Soro, Emmanuel (DNI: 33.778.589)
+  --------------------------------------------------------------------------
+*****************************************************************************/
 
-int LDRReading = 0;
-int LDRReading2 = 0;
+/* Constantes */
+#define ledPin_der         3
+#define ledPin_izq         5
+#define sensorPin_der      A3
+#define sensorPin_izq      A2
+
+/* Modo de ejecucion */
+int lecturaSensor_der = 0;
+int lecturaSensor_izq = 0;
  
-void setup() {
-  Serial.begin(9600);    //iniciar puerto serie
-  pinMode(ledPIN , OUTPUT);  //definir pin como salida
-  pinMode(ledPIN2 , OUTPUT);  //definir pin como salida
+void setup(){
+  Serial.begin(9600);   // 9600: puerto serie
+  
+  /* Inicializo LEDs  */
+  pinMode(ledPin_der , OUTPUT);
+  pinMode(ledPin_izq , OUTPUT);
 }
  
 void loop(){
-  LDRReading = analogRead(ledLDR); 
-  if(LDRReading >= 75){
-    analogWrite(ledPIN, 80);
-    delay(250); // retardo para hacer más fácil la lectura
+  lecturaSensor_der = analogRead(sensorPin_der); 
+  if(lecturaSensor_der >= 75){
+    analogWrite(ledPin_der, 80);
+    delay(250);
   }else{
-    digitalWrite(ledPIN , HIGH);   // poner el Pin en HIGH
+    digitalWrite(ledPin_der , HIGH);
   }  
   
-  LDRReading2 = analogRead(ledLDR2); 
-  if(LDRReading2 >= 75){
-    analogWrite(ledPIN2, 80);
-    delay(250); // retardo para hacer más fácil la lectura
+  lecturaSensor_izq = analogRead(sensorPin_izq); 
+  if(lecturaSensor_izq >= 75){
+    analogWrite(ledPin_izq, 80);
+    delay(250);
   }else{
-    digitalWrite(ledPIN2 , HIGH);   // poner el Pin en HIGH
+    digitalWrite(ledPin_izq , HIGH);
   }  
 }
