@@ -2,7 +2,6 @@
 
 ## Grupo: X2
 - Frattini, Maximiliano Gabriel DNI: 26.849.323
-- Hornos, Nicolas DNI: 36.076.620
 - Rodeiro, Gonzalo DNI: 37.753.908
 - Salva, Ricardo Nicolás DNI: 38.142.454
 - Soro, Emmanuel DNI: 33.778.589
