@@ -1,14 +1,29 @@
 #include <ESP8266WiFi.h>
 
+#define TIME_OUT 10
+
 const char* wifiID = "Speedy-Fibra-F58CFB";
 const char* wifiPass= "2b8b4d39D6FaDd5a2Y97";
+int timeoutConexion = 10;
 
 void setup() {
   Serial.begin(115200);
   delay(1000);
+  if(conectar()){
+     Serial.println("");
+     Serial.println("Conexion exitosa!");
+     Serial.println("IP address: ");
+     Serial.println(WiFi.localIP()); //Mostramos la ip obtenida
+  }
+}
+ 
+void loop() {
+  
+}
 
-  /**** CONEXION A WIFI****/
-
+bool conectar(){
+    /**** CONEXION A WIFI****/
+  Serial.println("");
   Serial.print("Intentando conectar a:");
   Serial.println(wifiID);
 
@@ -16,17 +31,20 @@ void setup() {
   WiFi.mode(WIFI_STA); //Modo cliente wifi
   
 
-  while (WiFi.status() != WL_CONNECTED){
+  while (WiFi.status() != WL_CONNECTED && (timeoutConexion > 0)){
     delay(500);
     Serial.print(".");
+    timeoutConexion--;
   }
-  
-  Serial.println("");
-  Serial.println("Conexion exitosa!");
-  Serial.println("IP address: ");
-  Serial.println(WiFi.localIP()); //Mostramos la ip obtenida
-}
- 
-void loop() {
 
+  if (WiFi.status() == WL_CONNECTED)
+  {
+    return true;
+  }
+  else
+  {
+    Serial.print("\nNo pudo conectarse a la red: ");    
+    Serial.println(wifiID);
+    return false;
+  }
 }
