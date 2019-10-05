@@ -36,7 +36,7 @@ void loop(){
     delay(250);
   }else{
     digitalWrite(ledPin_der , HIGH);
-    Serial.print("todo ok");
+    Serial.print("todo esta ok");
   }  
   
   lecturaSensor_izq = analogRead(sensorPin_izq); 
