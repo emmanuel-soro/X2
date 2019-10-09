@@ -124,6 +124,14 @@ Utilizaremos una batería como fuente de energía externa para poder alimentar d
 
 ![diagramaFisico](https://i.imgur.com/ShPatTN.png)
 
+### Diagrama Lógico
+
+![diagramaLog](https://i.imgur.com/kj9nqf5.png)
+
+### Diagrama de Software
+
+![diagramaSW](https://i.imgur.com/u1256z1.png)
+
 ### Diagrama de Conexiones
 
 ![diagramaConex](https://i.imgur.com/9GQMWs9.png)
