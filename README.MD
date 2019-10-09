@@ -165,3 +165,9 @@ En el anterior prototipo surgió el problema de que la potencia máxima que podi
 Aquí incorporamos la estructura, comenzamos trabajando con una caja de carton en la cual añadimos el prototipo 4, cambiando las leds por una tira de luces led para poder obtener una luz más potente.
 
 ![imagenProt5](https://i.imgur.com/r1Hrp9p.png)
+
+### Prototipo 6:
+
+En este prototipo, tenemos la estructura de fibrofacil y dos tiras led con las cuales comenzamos a realizar medidas que tienen los sensores con determinadas potencias de las leds.
+
+![imagenProt6](https://i.imgur.com/GT0os2S.png)
