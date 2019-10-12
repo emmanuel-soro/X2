@@ -11,33 +11,56 @@
   --------------------------------------------------------------------------
 *****************************************************************************/
 
+
+/* Bibliotecas */
 #include <ESP8266WiFi.h>
 
-/* Constantes */
-#define TIME_OUT 10
-
-/* Conexion de red */
+/* Conexion de red  */
 const char* wifiID = "Speedy-Fibra-F58CFB";
 const char* wifiPass= "2b8b4d39D6FaDd5a2Y97";
+
+/* Conexion del servidor  */
+const char* ipServidor = "192.168.1.47";
+const uint16_t puertoIpServidor = 8087;
+WiFiClient client;
+
+/* Modo de ejecucion */
 int timeoutConexion = 10;
 
 void setup() {
   Serial.begin(115200);
-  delay(1000);
-  if(conectar()){
-     Serial.println("");
-     Serial.println("Conexion exitosa!");
-     Serial.println("IP address: ");
-     Serial.println(WiFi.localIP()); //Mostramos la ip obtenida
-  }
+  Serial.println("**** Bienvenido: Smart Farm ****");
+  delay(1000);  
 }
  
 void loop() {
-  
+  if(conectar()){
+     Serial.println("");
+     Serial.println("Wifi ok!");
+     Serial.println("IP address: ");
+     Serial.println(WiFi.localIP());
+     Serial.println("------------------");
+     delay(300);
+     Serial.print("Inicializando Cliente: ");
+     
+     if (iniciarCliente()) {        
+       /* Sacar imagen */        
+       client.print(String("GET /photo") + " HTTP/1.1\r\n" +
+       "Host: 192.168.1.47:8087" + "\r\n" +
+       "Connection: keep-alive\r\n" +
+       "\r\n"       
+      );
+    }else{
+      Serial.println("Error: No se saco la imagen");
+    }
+  }else{
+   Serial.println("Error: No se pudo conecetar al Wifi");
+   client.stop();
+  }
+  delay(10000);   
 }
 
 bool conectar(){
-  /* Conexión wifi */
   Serial.println("");
   Serial.print("Intentando conectar a:");
   Serial.println(wifiID);
@@ -58,4 +81,9 @@ bool conectar(){
     Serial.println(wifiID);
     return false;
   }
+}
+
+bool iniciarCliente()
+{
+  return client.connect(ipServidor, puertoIpServidor) ? true : false;
 }
