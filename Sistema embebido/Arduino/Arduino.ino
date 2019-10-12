@@ -2,7 +2,7 @@
 /****************************************************************************
   --------------------------------------------------------------------------
   | Proyecto      : Smart Farm
-  | Actualizado   : 28/09/2019
+  | Actualizado   : 12/10/2019
   | Tema          : Arduino 
   | Autores       : ~ Frattini, Maximiliano Gabriel (DNI: 26.849.323)
   |                 ~ Rodeiro, Gonzalo (DNI: 37.753.908)
@@ -20,7 +20,6 @@
 #define sensorPin_der      A3
 #define sensorPin_izq      A2
 #define sensorPin_arr      A4
-#define sensorPin_abajo    A5
 
 /* Modo de ejecucion */
 int lecturaSensor_der = 0;
@@ -35,7 +34,8 @@ void setup(){
   pinMode(ledPin_der , OUTPUT);
   pinMode(ledPin_izq , OUTPUT);
   pinMode(ledPin_arr , OUTPUT);
-  //pinMode(ledPin_abajo , OUTPUT);
+  pinMode(ledPin_abajo , OUTPUT);
+  digitalWrite(ledPin_abajo , 8000);
 }
  
 void loop(){
@@ -62,12 +62,4 @@ void loop(){
   }else{
     digitalWrite(ledPin_arr , HIGH);
   }  
-
-  //lecturaSensor_abajo = analogRead(sensorPin_abajo); 
-  //if(lecturaSensor_abajo >= 75){
-  //  analogWrite(ledPin_abajo, 80);
-  //  delay(250);
-  //}else{
-  //  digitalWrite(ledPin_abajo , HIGH);
-  //}  
 }
