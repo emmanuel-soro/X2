@@ -118,15 +118,15 @@ Utilizaremos una batería como fuente de energía externa para poder alimentar d
 
 ### Diagrama Funcional
 
-![diagramaFuncional](https://i.imgur.com/4NWDc9S.png)
+![diagramaFuncional](https://i.imgur.com/jS8N7Tj.png)
 
 ### Diagrama Físico
 
-![diagramaFisico](https://i.imgur.com/ShPatTN.png)
+![diagramaFisico](https://i.imgur.com/8rycnSy.png)
 
 ### Diagrama Lógico
 
-![diagramaLog](https://i.imgur.com/mTUVPf2.png)
+![diagramaLog](https://i.imgur.com/Q1zch5a.png)
 
 ### Diagrama de Software
 
