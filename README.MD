@@ -106,11 +106,11 @@ Las células de sulfuro del cadmio se basan en la capacidad del cadmio de variar
 
 Un regulador de tensión o regulador de voltaje es un dispositivo electrónico diseñado para mantener un nivel de tensión constante. Utilizaremos reguladores de tensión para lograr variar la potencia que llega a las luces LED mediante PWM.
 
-* Batería 12 v
+* Fuente 12v 7a
 
-![imagenBat](https://i.imgur.com/QJO5bhb.png)
+![imagenBat](https://i.imgur.com/Rs3sfXR.png)
 
-Utilizaremos una batería como fuente de energía externa para poder alimentar de manera correcta a las luces LED.
+Utilizaremos una fuente adicional como fuente de energía externa para poder alimentar de manera correcta a las luces LED.
 
 ### Diagrama de Arquitectura General
 
@@ -134,7 +134,7 @@ Utilizaremos una batería como fuente de energía externa para poder alimentar d
 
 ### Diagrama de Conexiones
 
-![diagramaConex](https://i.imgur.com/9GQMWs9.png)
+![diagramaConex](https://i.imgur.com/yK6vvFG.png)
 
 ### Prototipo 1:
 
@@ -172,6 +172,18 @@ En este prototipo, tenemos la estructura de fibrofacil y dos tiras led con las c
 
 ![imagenProt6](https://i.imgur.com/GT0os2S.png)
 
+### Prototipo 7:
+
+Aquí incorporamos la cámara, las leds ya ubicadas (faltando la led BAJA), se refinó el circuito y se lo ubicó en la esctructura. Decidimos reemplazar la batería por una fuente externa de 12v y 7a debido a que la batería tenia un peso significativo. En este prototipo ya pudimos obtener una imagen tomada por la camara mediante una petición enviada al servidor, el cual se comunica con la cámara para tomar un snapshot y la almacena.
+
+![imagen1Prot7](https://i.imgur.com/p40qbOi.png)
+
+![imagen1Prot7](https://i.imgur.com/rQ1NN5H.png)
+
+![imagen1Prot7](https://i.imgur.com/UA2CwJR.png)
+
+
+
 ### Manual de Usuario v1.0:
 
 **PRIMEROS PASOS**
@@ -180,7 +192,7 @@ En este prototipo, tenemos la estructura de fibrofacil y dos tiras led con las c
 
 1. El usuario encenderá SmartFarm.
 2. El usuario ingresará a la aplicación SmartFarm en su dispositivo Android* (previamente descargada e instalada).
-3. Pasos para que se conecte a la red
+3. *Pasos para que se conecte a la red (falta definir)*
 4. Luego de un tiempo pequeño, el dispositivo SmartFarm ya se encontrará conectado a la Red.
 
 * *Versión mínima de Android: a definir.*
