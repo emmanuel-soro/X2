@@ -1,8 +1,3 @@
-import time #Para saber tiempo de procesamiento
-from PIL import Image #Si usamos los metodos de abajo
-import cv2
-import numpy as np
-
 """ Para el desarrollo del procesamiento de imagenes, se opto utilizar la libreria OPENCV (desarrollada por intel)
     dado que se encuentra muy bien optimizada. Se obtuvieron tiempos de procesamiento mucho mas bajo que los algoritmos
     implementados con la libreria Image. 
@@ -11,13 +6,27 @@ import numpy as np
         -Python 3.7.5
         -Libreria opencv 4.1.1"""
 
+import time #Para saber tiempo de procesamiento
+from PIL import Image #Si usamos los metodos de abajo
+import cv2
+import numpy as np
+
+# DECLARACION DE FUNCIONES
+
 def reducir_ruido_gauss(rutaRoot, imgName):
+    
+    """ Esta funcion lo que hace es reducir el ruido de la imagen en cuanto a los pixeles,
+        el objetivo es quitar detalles que no son de importancia y que generan conflictos. """
+        
     img = cv2.imread(rutaRoot + imgName)
     img_sinRuido = cv2.GaussianBlur(img,(5,5),0)
     cv2.imwrite(rutaRoot + "sinruido.jpg", img_sinRuido)
 
 def separar_verde(rutaRoot, imgName):
-
+    
+    """ Esta funcion recorta los pixeles que se encuentran en la gama del verde. Lo que
+        no se encuentre en dicha gama, se pisa con negro. """
+        
     img = cv2.imread(rutaRoot + imgName) 
     #Convertimos a hsv 
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
@@ -31,6 +40,11 @@ def separar_verde(rutaRoot, imgName):
     cv2.imwrite(rutaRoot + "soloverde.jpg", green)
 
 def escalado_a_grises_y_bin(rutaRoot, imgName):
+    
+    """ Esta funcion pasa la imagen de color RBG a una escala de grises. Luego, se binariza
+        la imagen con un umbral determinado. El umbral fue calculado de manera experimental,
+        realizando pruebas con distintos umbrales y determinando el mas apropiado. """
+        
     umbral = 27.8
     umbralMax = 255
     gray = cv2.imread(rutaRoot + imgName, cv2.IMREAD_GRAYSCALE)
@@ -39,6 +53,10 @@ def escalado_a_grises_y_bin(rutaRoot, imgName):
     cv2.imwrite(rutaRoot + "a_grises.jpg", gray)
 
 def obtener_cantidad_blanco(rutaRoot, imgName):
+    
+    """ Esta funcion cuenta la cantidad de pixeles en blanco y devuelve el porcentaje
+        de pixeles blancos contra el total de pixeles de la imagen. """
+        
     img = cv2.imread(rutaRoot + imgName, 0)
     #cv2.imwrite(rutaRoot + "imagenPrueba.jpg", img)
     cant_pix_blancos = cv2.countNonZero(img) #Obtengo la cantidad de pixeles blancos
@@ -47,15 +65,21 @@ def obtener_cantidad_blanco(rutaRoot, imgName):
     print("Cantidad total de pixeles:", cant_pix_totales)
     return (cant_pix_blancos * 100) / cant_pix_totales
 
-#Main
+# FIN DECLARACION DE FUNCIONES.
+
+# FUNCION MAIN
 
 """ Se produciran las imagenes paso por paso. Esto tiene solo uso para realizar tests y evidenciar qué
     esta haciendo el algoritmo de procesamiento. """
 
-tiempoIn = time.time() #Para saber tiempo de procesamiento
+#Para saber tiempo de procesamiento
+tiempoIn = time.time() 
 
-ruta = "C:/Users/rnsal/Documents/imagenes/" #Será la ruta a donde se encuentra la imagen
-imgName = "im2.jpg" #Nombre de la imagen a procesar
+#Será la ruta a donde se encuentra la imagen
+ruta = "C:/Users/rnsal/Documents/imagenes/" 
+#Nombre de la imagen a procesar
+imgName = "im2.jpg"
+
 print("********COMENZANDO********")
 separar_verde(ruta, imgName) 
 print("******FINALIZANDO SEPARAR VERDE******")
@@ -65,9 +89,12 @@ escalado_a_grises_y_bin(ruta, "soloverde.jpg")
 print("********FINALIZANDO ESCALADO A GRISES Y POSTERIOR BINARIZACION CON UMBRAL********")
 nvl_follaje_porc = obtener_cantidad_blanco(ruta , "binarizada.jpg")
 print("El nivel de follaje es de", nvl_follaje_porc, "%")
+
 #Para Saber tiempo de procesamiento
 tiempoFin = time.time()
 print('El Proceso Tardo: ', tiempoFin - tiempoIn, 'Segundos')
+
+# FIN FUNCION MAIN
 
 
 #Codigo elaborado con libreria Image, drasticamente menos optimo que opencv.
@@ -133,3 +160,5 @@ print('El Proceso Tardo: ', tiempoFin - tiempoIn, 'Segundos')
     imgBinarizada.show()
     imgBinarizada.close()
     imOriginal.close()"""
+    
+    
