@@ -65,20 +65,59 @@ def obtener_cantidad_blanco(rutaRoot, imgName):
     print("Cantidad total de pixeles:", cant_pix_totales)
     return (cant_pix_blancos * 100) / cant_pix_totales
 
+
+def procesar_imagen(ruta):
+    
+    #Separamos verde
+    img = cv2.imread(ruta) 
+    #Convertimos a hsv 
+    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    #El verde se encuentra entre (36,25,25) y (86, 255,255) aprox
+    mask = cv2.inRange(hsv, (36, 25, 25), (86, 255,255))
+    #Sacamos solo lo que no este dentro del rango verde 
+    imask = mask>0 
+    green = np.zeros_like(img, np.uint8) 
+    green[imask] = img[imask] 
+    
+    #Reducimos ruido con el metodo de gauss
+      
+    img_sinRuido = cv2.GaussianBlur(green,(5,5),0)
+
+    #Escalamos a grises y binarizamos
+    
+    umbral = 27.8
+    umbralMax = 255
+    gray = cv2.cvtColor(img_sinRuido, cv2.COLOR_BGRA2GRAY)
+    t, binaria = cv2.threshold(gray, umbral, umbralMax, cv2.THRESH_BINARY)
+    
+    #Obtenemos follaje por la relacion pixesles blancos (verde) con negros
+
+    cant_pix_blancos = cv2.countNonZero(binaria) #Obtengo la cantidad de pixeles blancos
+    cant_pix_totales = binaria.size
+    print("Cantidad de pixeles blancos:", cant_pix_blancos)
+    print("Cantidad total de pixeles:", cant_pix_totales)
+    
+    #Retornamos el % de follaje
+    
+    return (cant_pix_blancos * 100) / cant_pix_totales
+
+
 # FIN DECLARACION DE FUNCIONES.
 
 # FUNCION MAIN
 
-""" Se produciran las imagenes paso por paso. Esto tiene solo uso para realizar tests y evidenciar qué
+""" Se produciran las imagenes paso por paso. Esto tiene solo uso para realizar tests y evidenciar que
     esta haciendo el algoritmo de procesamiento. """
 
 #Para saber tiempo de procesamiento
 tiempoIn = time.time() 
 
-#Será la ruta a donde se encuentra la imagen
+#Sera la ruta a donde se encuentra la imagen
 ruta = "C:/Users/rnsal/Documents/imagenes/" 
 #Nombre de la imagen a procesar
 imgName = "im2.jpg"
+
+#Main paso por paso
 
 print("********COMENZANDO********")
 separar_verde(ruta, imgName) 
@@ -89,6 +128,8 @@ escalado_a_grises_y_bin(ruta, "soloverde.jpg")
 print("********FINALIZANDO ESCALADO A GRISES Y POSTERIOR BINARIZACION CON UMBRAL********")
 nvl_follaje_porc = obtener_cantidad_blanco(ruta , "binarizada.jpg")
 print("El nivel de follaje es de", nvl_follaje_porc, "%")
+
+print("El nivel de follaje es de", procesar_imagen(ruta + imgName), "%.")
 
 #Para Saber tiempo de procesamiento
 tiempoFin = time.time()
