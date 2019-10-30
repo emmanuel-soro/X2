@@ -1,5 +1,5 @@
 """ Para el desarrollo del procesamiento de imagenes, se opto utilizar la libreria OPENCV (desarrollada por intel)
-    dado que se encuentra muy bien optimizada. Se obtuvieron tiempos de procesamiento mucho mas bajo que los algoritmos
+    dado que se encuentra muy bien optimizada. Se obtuvieron tiempos de procesamiento mucho mas bajos que los algoritmos
     implementados con la libreria Image. 
     SW utilizado:
         -IDE Eclipse
@@ -115,7 +115,7 @@ tiempoIn = time.time()
 #Sera la ruta a donde se encuentra la imagen
 ruta = "C:/Users/rnsal/Documents/imagenes/" 
 #Nombre de la imagen a procesar
-imgName = "im2.jpg"
+imgName = "img.jpg"
 
 #Main paso por paso
 
@@ -128,6 +128,8 @@ escalado_a_grises_y_bin(ruta, "soloverde.jpg")
 print("********FINALIZANDO ESCALADO A GRISES Y POSTERIOR BINARIZACION CON UMBRAL********")
 nvl_follaje_porc = obtener_cantidad_blanco(ruta , "binarizada.jpg")
 print("El nivel de follaje es de", nvl_follaje_porc, "%")
+
+#Main final
 
 print("El nivel de follaje es de", procesar_imagen(ruta + imgName), "%.")
 
