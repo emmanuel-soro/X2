@@ -7,7 +7,6 @@
         -Libreria opencv 4.1.1"""
 
 import time #Para saber tiempo de procesamiento
-from PIL import Image #Si usamos los metodos de abajo
 import cv2
 import numpy as np
 
@@ -138,70 +137,3 @@ tiempoFin = time.time()
 print('El Proceso Tardo: ', tiempoFin - tiempoIn, 'Segundos')
 
 # FIN FUNCION MAIN
-
-
-#Codigo elaborado con libreria Image, drasticamente menos optimo que opencv.
-
-#Escalado a grises resuelto con Image form PIL
-
-"""def escala_de_grises(rutaRoot, imgName):
-    
-    #Obtengo la ruta especifica con el nombre de la imagen
-    ruta = rutaRoot + imgName
-    #Guardo la imagen en mi variable
-    imOriginal = Image.open(ruta)
-    #Muestro la imagen que estoy procesando
-    imOriginal.show()
-    #Creo otra variable con la imagen para pasarla a grises
-    imEnGrises = imOriginal
-    recorrerFilas = 0
-    #Recorro la matriz (cada pixel es una posicion (fila,columna) y paso pixel por pixel a gris
-    while recorrerFilas < imEnGrises.size[0]:
-        recorrerColumn = 0
-        while recorrerColumn < imEnGrises.size[1]:
-            r, g, b = imEnGrises.getpixel((recorrerFilas,recorrerColumn))
-            g = (r + g + b) / 3
-            gris = int(g)
-            pixel = tuple([gris, gris, gris])
-            imEnGrises.putpixel((recorrerFilas,recorrerColumn), pixel)
-            recorrerColumn+=1
-        recorrerFilas+=1
-    #Muestro imagen procesada
-    imEnGrises.show()
-    #Guardo imagen procesada
-    imEnGrises.save(rutaRoot + "imgProcesada.jpg")"""
-   
-
-#Binarizacion con Umbral resuelto con Image from PIL
-
-"""def binarizacion_con_umbral(rutaRoot, imgName):
-    imOriginal=Image.open(rutaRoot + imgName)
-    #si la imagen no es a escala de grises se hace la conversion
-    if imOriginal.mode != 'L':
-        imOriginal=imOriginal.convert('L')
-
-        #el umbral esta forzosamente comprendido entre 1 y 254 para las
-        #imagenes de 8 bits a escala de grises
-    umbral=30
-
-    datos=imOriginal.getdata()
-    datos_binarios=[]
-
-    for x in datos:
-        if x<umbral:
-            datos_binarios.append(0)
-            continue
-            #si es mayor o igual a umbral se agrega 1 en ves de 0
-            #podria hacerse con 255 en ves de 1
-        datos_binarios.append(1)
-
-    #en caso de utilizar 255 como valor superior el metodo new
-    #llevaria 'L' en ves de '1' en el primer argumento
-    imgBinarizada=Image.new('1', imOriginal.size)
-    imgBinarizada.putdata(datos_binarios)
-    imgBinarizada.save(rutaRoot + "binarizada.jpg")
-    imgBinarizada.show()
-    imgBinarizada.close()
-    imOriginal.close()"""
-    
-    
