@@ -2,7 +2,7 @@
 /****************************************************************************
   --------------------------------------------------------------------------
   | Proyecto      : Smart Farm
-  | Actualizado   : 12/10/2019
+  | Actualizado   : 02/11/2019
   | Tema          : Arduino 
   | Autores       : ~ Frattini, Maximiliano Gabriel (DNI: 26.849.323)
   |                 ~ Rodeiro, Gonzalo (DNI: 37.753.908)
@@ -12,54 +12,62 @@
 *****************************************************************************/
 
 /* Constantes */
-#define ledPin_der         10
-#define ledPin_izq         5
-#define ledPin_arr         6
-#define ledPin_abajo       9
+#define ledPin_arr         5
+#define ledPin_izq         10
+#define ledPin_der         6
+#define ledPin_aba         9
 
-#define sensorPin_der      A3
-#define sensorPin_izq      A2
-#define sensorPin_arr      A4
+#define sensorPin_arr      A2
+#define sensorPin_izq      A3
+#define sensorPin_der      A4
 
-/* Modo de ejecucion */
-int lecturaSensor_der = 0;
-int lecturaSensor_izq = 0;
-int lecturaSensor_arr = 0;
-int lecturaSensor_abajo = 0;
- 
+#define pulsador           8
+
+#define valorHigh          255
+#define valorLow           0
+
 void setup(){
+  
   Serial.begin(9600);   // 9600: puerto serie
   
   /* Inicializo LEDs  */
-  pinMode(ledPin_der , OUTPUT);
-  pinMode(ledPin_izq , OUTPUT);
-  pinMode(ledPin_arr , OUTPUT);
-  pinMode(ledPin_abajo , OUTPUT);
-  digitalWrite(ledPin_abajo , 8000);
+  pinMode(ledPin_der, OUTPUT);
+  pinMode(ledPin_izq, OUTPUT);
+  pinMode(ledPin_arr, OUTPUT);
+  pinMode(ledPin_aba, OUTPUT);
+
+  /* Inicialiazo pulsador */
+  pinMode(pulsador, INPUT);
 }
  
 void loop(){
-  lecturaSensor_der = analogRead(sensorPin_der); 
-  if(lecturaSensor_der >= 75){
-    analogWrite(ledPin_der, 80);
-    delay(250);
-  }else{
-    digitalWrite(ledPin_der , HIGH);
-  }  
-  
-  lecturaSensor_izq = analogRead(sensorPin_izq); 
-  if(lecturaSensor_izq >= 75){
-    analogWrite(ledPin_izq, 80);
-    delay(250);
-  }else{
-    digitalWrite(ledPin_izq , HIGH);
-  }
+  verificarEstadoPulsador();
+  // digitalWrite(ledPin_aba, HIGH);
 
-  lecturaSensor_arr = analogRead(sensorPin_arr); 
-  if(lecturaSensor_arr >= 75){
-    analogWrite(ledPin_arr, 80);
-    delay(250);
+  //dimerizarPines(sensorPin_der, ledPin_der);
+  //dimerizarPines(sensorPin_izq, ledPin_izq);
+  //dimerizarPines(sensorPin_arr, ledPin_arr);
+}
+
+void verificarEstadoPulsador(){
+  if (digitalRead(pulsador) == HIGH) {
+    prenderLuces(valorHigh);
   }else{
-    digitalWrite(ledPin_arr , HIGH);
-  }  
+    prenderLuces(valorLow);
+  }
+}
+
+void prenderLuces(int valor){
+  digitalWrite(ledPin_der, valor);
+  digitalWrite(ledPin_izq, valor);
+  digitalWrite(ledPin_arr, valor);
+}
+
+void dimerizarPines(int sensor, int pin){
+  int lecturaSensor = analogRead(sensor); 
+  if(lecturaSensor >= 255){
+    analogWrite(pin, 0);
+  }else{
+    analogWrite(pin, 255 - lecturaSensor);
+  }
 }
