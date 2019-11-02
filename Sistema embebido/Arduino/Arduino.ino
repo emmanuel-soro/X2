@@ -26,8 +26,7 @@
 #define valorHigh          255
 #define valorLow           0
 
-void setup(){
-  
+void setup(){  
   Serial.begin(9600);   // 9600: puerto serie
   
   /* Inicializo LEDs  */
@@ -39,17 +38,21 @@ void setup(){
   /* Inicialiazo pulsador */
   pinMode(pulsador, INPUT);
 }
- 
-void loop(){
-  verificarEstadoPulsador();
-  // digitalWrite(ledPin_aba, HIGH);
 
-  //dimerizarPines(sensorPin_der, ledPin_der);
-  //dimerizarPines(sensorPin_izq, ledPin_izq);
-  //dimerizarPines(sensorPin_arr, ledPin_arr);
+void loop(){
+  
+  /* 4 Estados de las luces */
+  estadoReposo();
+  estadoPulsador();
+  estadoFollaje();
+  estadoTallo();
 }
 
-void verificarEstadoPulsador(){
+void estadoReposo(){
+  prenderLuces(valorLow);
+}
+
+void estadoPulsador(){
   if (digitalRead(pulsador) == HIGH) {
     prenderLuces(valorHigh);
   }else{
@@ -57,10 +60,18 @@ void verificarEstadoPulsador(){
   }
 }
 
+void estadoFollaje(){
+  dimerizarPines(sensorPin_der, ledPin_der);
+  dimerizarPines(sensorPin_izq, ledPin_izq);
+  dimerizarPines(sensorPin_arr, ledPin_arr);
+  // digitalWrite(ledPin_aba, HIGH);
+}
+
 void prenderLuces(int valor){
   digitalWrite(ledPin_der, valor);
   digitalWrite(ledPin_izq, valor);
   digitalWrite(ledPin_arr, valor);
+  digitalWrite(ledPin_aba, valor);
 }
 
 void dimerizarPines(int sensor, int pin){
@@ -70,4 +81,11 @@ void dimerizarPines(int sensor, int pin){
   }else{
     analogWrite(pin, 255 - lecturaSensor);
   }
+}
+
+void estadoTallo(){
+  digitalWrite(ledPin_der, valorLow);
+  digitalWrite(ledPin_izq, valorLow);
+  digitalWrite(ledPin_arr, valorLow);
+  digitalWrite(ledPin_aba, valorHigh);
 }
