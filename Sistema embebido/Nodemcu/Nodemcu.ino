@@ -24,8 +24,10 @@ const char* wifiPass= "2b8b4d39D6FaDd5a2Y97";
 const char* ipServidor = "192.168.1.35";
 const uint16_t puertoIpServidor = 8087;
 WiFiClient client;
+
+/* Conexion con Arduino */
 SoftwareSerial SerialEsp(3,2); // RX y TX
-char data;
+char data; // Para ver mensaje
 
 /* Modo de ejecucion */
 int timeoutConexion = 10;
