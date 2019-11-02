@@ -6,9 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -55,10 +52,4 @@ public class CameraController {
 		return Files.readAllBytes(Paths.get(photo.getAbsolutePath()));
 
 	}
-
-	public Set<String> listFilesUsingJavaIO(String dir) {
-		return Stream.of(new File(dir).listFiles()).filter(file -> !file.isDirectory()).map(File::getAbsolutePath)
-				.collect(Collectors.toSet());
-	}
-
 }
