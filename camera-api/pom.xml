@@ -9,7 +9,7 @@
 		<version>2.1.8.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>edu.unlam.soa.x2</groupId>
+	<groupId>edu.unlam.soa</groupId>
 	<artifactId>camera-api</artifactId>
 	<version>2.1.0</version>
 	<name>camera-api</name>

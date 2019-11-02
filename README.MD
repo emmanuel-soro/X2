@@ -106,11 +106,11 @@ Las células de sulfuro del cadmio se basan en la capacidad del cadmio de variar
 
 Un regulador de tensión o regulador de voltaje es un dispositivo electrónico diseñado para mantener un nivel de tensión constante. Utilizaremos reguladores de tensión para lograr variar la potencia que llega a las luces LED mediante PWM.
 
-* Batería 12 v
+* Fuente 12v 7a
 
-![imagenBat](https://i.imgur.com/QJO5bhb.png)
+![imagenBat](https://i.imgur.com/Rs3sfXR.png)
 
-Utilizaremos una batería como fuente de energía externa para poder alimentar de manera correcta a las luces LED.
+Utilizaremos una fuente adicional como fuente de energía externa para poder alimentar de manera correcta a las luces LED.
 
 ### Diagrama de Arquitectura General
 
@@ -118,15 +118,23 @@ Utilizaremos una batería como fuente de energía externa para poder alimentar d
 
 ### Diagrama Funcional
 
-![diagramaFuncional](https://i.imgur.com/4NWDc9S.png)
+![diagramaFuncional](https://i.imgur.com/jS8N7Tj.png)
 
 ### Diagrama Físico
 
-![diagramaFisico](https://i.imgur.com/ShPatTN.png)
+![diagramaFisico](https://i.imgur.com/8rycnSy.png)
+
+### Diagrama Lógico
+
+![diagramaLog](https://i.imgur.com/Q1zch5a.png)
+
+### Diagrama de Software
+
+![diagramaSW](https://i.imgur.com/u1256z1.png)
 
 ### Diagrama de Conexiones
 
-![diagramaConex](https://i.imgur.com/9GQMWs9.png)
+![diagramaConex](https://i.imgur.com/yK6vvFG.png)
 
 ### Prototipo 1:
 
@@ -157,3 +165,71 @@ En el anterior prototipo surgió el problema de que la potencia máxima que podi
 Aquí incorporamos la estructura, comenzamos trabajando con una caja de carton en la cual añadimos el prototipo 4, cambiando las leds por una tira de luces led para poder obtener una luz más potente.
 
 ![imagenProt5](https://i.imgur.com/r1Hrp9p.png)
+
+### Prototipo 6:
+
+En este prototipo, tenemos la estructura de fibrofacil y dos tiras led con las cuales comenzamos a realizar medidas que tienen los sensores con determinadas potencias de las leds.
+
+![imagenProt6](https://i.imgur.com/GT0os2S.png)
+
+### Prototipo 7:
+
+Aquí incorporamos la cámara, las leds ya ubicadas (faltando la led BAJA), se refinó el circuito y se lo ubicó en la esctructura. Decidimos reemplazar la batería por una fuente externa de 12v y 7a debido a que la batería tenia un peso significativo. En este prototipo ya pudimos obtener una imagen tomada por la camara mediante una petición enviada al servidor, el cual se comunica con la cámara para tomar un snapshot y la almacena.
+
+![imagen1Prot7](https://i.imgur.com/p40qbOi.png)
+
+![imagen1Prot7](https://i.imgur.com/rQ1NN5H.png)
+
+![imagen1Prot7](https://i.imgur.com/UA2CwJR.png)
+
+
+
+### Manual de Usuario v1.0:
+
+**PRIMEROS PASOS**
+
+*Conexión SmartFarm – Android*
+
+1. El usuario encenderá SmartFarm.
+2. El usuario ingresará a la aplicación SmartFarm en su dispositivo Android* (previamente descargada e instalada).
+3. *Pasos para que se conecte a la red (falta definir)*
+4. Luego de un tiempo pequeño, el dispositivo SmartFarm ya se encontrará conectado a la Red.
+
+* *Versión mínima de Android: a definir.*
+
+**EVENTOS**
+
+*Registrar Planta*
+
+1. Desde el dispositivo Android, el usuario podrá registrar plantas con los siguientes datos:
+    * Nombre (será su identificador, debe ser único).
+    * Imagen (opcional).
+2. El usuario oprime aceptar y se realizará el registro.
+
+*-Éste evento es necesario para llevar el monitoreo de distintas plantas y poder realizar los reportes de crecimiento.*
+
+**Apagar Dispositivo SmartFarm**
+
+1. Desde el dispositivo Android en la aplicación SmartFarm, el usuario deberá presionar el botón Apagar.
+2. Opcionalmente se podrá optar por apagar mediante shake (agitar el celular).
+3. Opcionalmente se podrá apagar mediante el botón Apagar/Prender dispuesto en el dispositivo SmartFarm.
+
+**Prender Dispositivo SmartFarm**
+
+1. Desde el dispositivo Android en la aplicación SmartFarm, el usuario deberá presionar el botón Prender.
+2. Opcionalmente se podrá optar por prender mediante shake (agitar el celular).
+3. Opcionalmente se podrá prender el dispositivo mediante el botón Apagar/Prender dispuesto en el dispositivo SmartFarm.
+
+**Obtener reporte de ritmo de Crecimiento de Planta**
+
+1. Desde el dispositivo Android en la aplicación SmartFarm, el usuario deberá ingresar a la actividad Obtener Reporte.
+2. El usuario deberá seleccionar la Planta que se encuentra en el dispositivo SmartFarm.
+3. El usuario deberá oprimir Aceptar.
+4. Se realizará la sincronización de la cámara con el entorno creado en el dispositivo SmartFarm, calibrando las Leds para obtener una luz correcta para tomar imágenes. Y se realizará el procesamiento de las mismas para obtener los datos:
+    *  Diámetro estimado del tallo.
+    *  Nivel de follaje
+
+Que se utilizarán para realizar una comparativa en caso de que existan datos anteriores sobre dicha planta, y se los informará. De lo contrario, se informará el Diámetro estimado del tallo y el nivel de follaje.
+
+
+
