@@ -15,15 +15,16 @@
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="match_parent"
-            android:layout_height="291dp"
+            android:layout_width="wrap_content"
+            android:layout_height="250dp"
             app:srcCompat="@drawable/logo" />
 
         <TextView
             android:id="@+id/textView9"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sistemas Operativos Avanzados"
+            android:text="SO Avanzados"
             android:textAlignment="center"
             android:textColor="@android:color/black"
             android:textSize="24sp"
@@ -37,12 +38,6 @@
             android:textAlignment="center"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
-
-        <View
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider" />
 
         <TextView
             android:id="@+id/textView"
