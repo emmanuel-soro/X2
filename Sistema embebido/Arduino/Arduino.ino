@@ -24,10 +24,16 @@
 #define pulsador           8
 
 #define valorHigh          255
-#define valorLow           0
+#define valorLow           15
+#define valorOff           0
+
+#include <SoftwareSerial.h>
+SoftwareSerial SerialEsp(2, 3); // RX - TX
+char data = "R";
 
 void setup(){  
-  Serial.begin(9600);   // 9600: puerto serie
+  Serial.begin(19200);
+  SerialEsp.begin(9600);
   
   /* Inicializo LEDs  */
   pinMode(ledPin_der, OUTPUT);
@@ -40,38 +46,58 @@ void setup(){
 }
 
 void loop(){
-  
   /* 4 Estados de las luces */
-  estadoReposo();
-  estadoPulsador();
-  estadoFollaje();
-  estadoTallo();
+  if(!estadoPulsador()){
+    checkSerialCom();
+    if(data == 'F'){
+      Serial.println("ENTRE ESTADO FOLLAJE");
+      estadoFollaje();
+    }
+    if(data == 'T'){
+      Serial.println("ENTRE ESTADO TALLO");
+      estadoTallo();
+      delay(5000);
+      }
+    }
 }
 
 void estadoReposo(){
-  prenderLuces(valorLow);
+  prenderLucesAnalogico(valorLow);
 }
 
-void estadoPulsador(){
+boolean estadoPulsador(){
   if (digitalRead(pulsador) == HIGH) {
-    prenderLuces(valorHigh);
+    prenderLucesDigital(valorHigh);
+    return true;
   }else{
-    prenderLuces(valorLow);
+    estadoReposo();
+    return false;
   }
 }
 
 void estadoFollaje(){
+  digitalWrite(ledPin_aba, valorOff);
+  int cont = 0;
+  while(cont < 10000){
   dimerizarPines(sensorPin_der, ledPin_der);
   dimerizarPines(sensorPin_izq, ledPin_izq);
   dimerizarPines(sensorPin_arr, ledPin_arr);
-  // digitalWrite(ledPin_aba, HIGH);
+  cont = cont + 1;
+  }
 }
 
-void prenderLuces(int valor){
+void prenderLucesDigital(int valor){
   digitalWrite(ledPin_der, valor);
   digitalWrite(ledPin_izq, valor);
   digitalWrite(ledPin_arr, valor);
   digitalWrite(ledPin_aba, valor);
+}
+
+void prenderLucesAnalogico(int valor){
+  analogWrite(ledPin_der, valor);
+  analogWrite(ledPin_izq, valor);
+  analogWrite(ledPin_arr, valor);
+  analogWrite(ledPin_aba, valor);
 }
 
 void dimerizarPines(int sensor, int pin){
@@ -84,8 +110,17 @@ void dimerizarPines(int sensor, int pin){
 }
 
 void estadoTallo(){
-  digitalWrite(ledPin_der, valorLow);
-  digitalWrite(ledPin_izq, valorLow);
-  digitalWrite(ledPin_arr, valorLow);
+  digitalWrite(ledPin_der, valorOff);
+  digitalWrite(ledPin_izq, valorOff);
+  digitalWrite(ledPin_arr, valorOff);
   digitalWrite(ledPin_aba, valorHigh);
+}
+
+void checkSerialCom(){
+  if(SerialEsp.available() > 0){ // Checkeamos si hay informacion disponible.
+    while(SerialEsp.available() > 0){
+      data = (char)SerialEsp.read(); // Leemos del puerto serial.
+      Serial.print(data);
+    }
+  }
 }
