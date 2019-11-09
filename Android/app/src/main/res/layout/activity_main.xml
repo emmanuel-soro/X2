@@ -46,7 +46,7 @@
                     android:src="@drawable/icono_acceso" />
 
                 <ImageButton
-                    android:id="@+id/btnSolicitarAcceso"
+                    android:id="@+id/btnTomarFoto"
                     android:layout_width="135dp"
                     android:layout_height="129dp"
                     android:layout_alignParentRight="false"
