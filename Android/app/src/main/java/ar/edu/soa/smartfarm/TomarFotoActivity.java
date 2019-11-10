@@ -12,7 +12,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import ar.edu.soa.interfaces.RestService;
+import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,8 +48,14 @@ public class TomarFotoActivity extends AppCompatActivity {
 
 
     private void getPhoto() {
+
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.level(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://localhost:8087")
+                .baseUrl("http://10.0.2.2:8087")
+                .client(client)
                 .build();
 
         RestService restService = retrofit.create(RestService.class);
@@ -58,8 +66,8 @@ public class TomarFotoActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
-                System.out.println("Hubo respuesta exitosa "+ response.isSuccessful());
-                System.out.println("Codigo respuesta "+ response.code());
+                System.out.println("Hubo respuesta exitosa " + response.isSuccessful());
+                System.out.println("Codigo respuesta " + response.code());
 
                 if (response.isSuccessful()) {
 
@@ -72,6 +80,8 @@ public class TomarFotoActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                System.out.println("request failed: " + t.getMessage());
                 System.out.println("Anda mal la toma de foto");
             }
         });
