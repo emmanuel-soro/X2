@@ -9,6 +9,7 @@ import retrofit2.http.Query;
 
 public interface RestService {
 
+
     @GET("/getPhoto")
     Call<ResponseBody> getPhoto(@Query("id") String photoID);
 
