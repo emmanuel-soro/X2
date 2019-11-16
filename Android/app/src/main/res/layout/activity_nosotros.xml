@@ -10,6 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:paddingTop="50dp"
+        android:paddingBottom="180dp"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="16dp">
 
@@ -24,6 +26,7 @@
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="30dp"
             android:text="SO Avanzados"
             android:textAlignment="center"
             android:textColor="@android:color/black"
@@ -34,6 +37,7 @@
             android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="5dp"
             android:text="2019 - 2° Cuatrimestre"
             android:textAlignment="center"
             android:textColor="@android:color/black"
@@ -43,6 +47,7 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="5dp"
             android:text="Frattini, Maximiliano Gabriel DNI: 26.849.323"
             android:textAlignment="center"
             android:textSize="18sp" />
@@ -51,6 +56,7 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="5dp"
             android:text="Rodeiro, Gonzalo DNI: 37.753.908"
             android:textAlignment="center"
             android:textSize="18sp" />
@@ -59,6 +65,7 @@
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="5dp"
             android:text="Salva, Ricardo Nicolás DNI: 38.142.454"
             android:textAlignment="center"
             android:textSize="18sp" />
@@ -67,6 +74,7 @@
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="5dp"
             android:text="Soro, Emmanuel DNI: 33.778.589"
             android:textAlignment="center"
             android:textSize="18sp" />
@@ -76,6 +84,7 @@
             android:id="@+id/textView8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="5dp"
             android:text="\nVersión 1.0.0"
             android:textAlignment="center"
             android:textSize="14sp" />
