@@ -22,7 +22,6 @@ import retrofit2.Retrofit;
 
 public class TomarFotoActivity extends AppCompatActivity {
 
-    Button botonVolver;
     ImageView imageView;
 
     @Override
@@ -31,21 +30,33 @@ public class TomarFotoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tomar_foto);
 
         imageView = (ImageView) findViewById(R.id.imageDisplay);
-
-        botonVolver = (Button) findViewById(R.id.botonVolver);
-
-        botonVolver.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-
-                Intent mainIntent = new Intent(TomarFotoActivity.this, MainActivity.class);
-                startActivity(mainIntent);
-            }
-        });
-
         this.getPhoto();
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 
     private void getPhoto() {
 
@@ -54,12 +65,12 @@ public class TomarFotoActivity extends AppCompatActivity {
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8087")
+                .baseUrl("http://192.168.1.35:8087")
                 .client(client)
                 .build();
 
         RestService restService = retrofit.create(RestService.class);
-        Call<ResponseBody> call = restService.getPhoto("20191012115947");
+        Call<ResponseBody> call = restService.getPhoto("20191026121631");
 
 
         call.enqueue(new Callback<ResponseBody>() {
