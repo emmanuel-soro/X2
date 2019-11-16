@@ -1,8 +1,9 @@
 
+
 /****************************************************************************
   --------------------------------------------------------------------------
   | Proyecto      : Smart Farm
-  | Actualizado   : 02/11/2019
+  | Actualizado   : 16/11/2019
   | Tema          : Arduino 
   | Autores       : ~ Frattini, Maximiliano Gabriel (DNI: 26.849.323)
   |                 ~ Rodeiro, Gonzalo (DNI: 37.753.908)
@@ -27,9 +28,11 @@
 #define valorLow           15
 #define valorOff           0
 
+int lecturaSensor = 0;
+
 #include <SoftwareSerial.h>
 SoftwareSerial SerialEsp(2, 3); // RX - TX
-char data = "R";
+char data = "W";
 
 void setup(){  
   Serial.begin(19200);
@@ -46,7 +49,7 @@ void setup(){
 }
 
 void loop(){
-  /* 4 Estados de las luces */
+  /* 4 Estados de las luces 
   if(!estadoPulsador()){
     checkSerialCom();
     if(data == 'F'){
@@ -58,7 +61,19 @@ void loop(){
       estadoTallo();
       delay(5000);
       }
-    }
+    if(data == 'W'){
+      Serial.println("ENTRE ESTADOS DE SENSORES Y LUCES");
+      estadoSensores();
+      delay(2000);
+      estadoLuces();
+      delay(2000);
+      } 
+    }*/   
+
+      estadoSensores();
+      delay(2000);
+      estadoLuces();
+      delay(2000);
 }
 
 void estadoReposo(){
@@ -79,10 +94,10 @@ void estadoFollaje(){
   digitalWrite(ledPin_aba, valorOff);
   int cont = 0;
   while(cont < 10000){
-  dimerizarPines(sensorPin_der, ledPin_der);
-  dimerizarPines(sensorPin_izq, ledPin_izq);
-  dimerizarPines(sensorPin_arr, ledPin_arr);
-  cont = cont + 1;
+    dimerizarPines(sensorPin_der, ledPin_der);
+    dimerizarPines(sensorPin_izq, ledPin_izq);
+    dimerizarPines(sensorPin_arr, ledPin_arr);
+    cont = cont + 1;
   }
 }
 
@@ -123,4 +138,67 @@ void checkSerialCom(){
       Serial.print(data);
     }
   }
+}
+
+void estadoSensores(){
+  prenderLucesDigital(valorHigh);
+  delay(200);
+  int lecturaSensor1 = analogRead(sensorPin_izq);  
+  int lecturaSensor2 = analogRead(sensorPin_der); 
+  int lecturaSensor3 = analogRead(sensorPin_arr);  
+  prenderLucesDigital(0);
+  delay(200);
+  int lecturaSensor1b = analogRead(sensorPin_izq);  
+  int lecturaSensor2b = analogRead(sensorPin_der); 
+  int lecturaSensor3b = analogRead(sensorPin_arr); 
+
+ if (lecturaSensor1 - lecturaSensor1b > 50 )
+    Serial.println("Sensor 1 OK");
+ else
+    Serial.println("Sensor 1 No funciona");
+
+  if (lecturaSensor2 - lecturaSensor2b > 50 )
+    Serial.println("Sensor 2 OK");
+  else
+    Serial.println("Sensor 2 No funciona");
+
+ if (lecturaSensor3 - lecturaSensor3b > 50 )
+    Serial.println("Sensor 3 OK");
+ else
+    Serial.println("Sensor 3 No funciona");    
+    
+}
+
+void estadoLuces(){
+  boolean der = estadoLuz(255,0,0,0,"Derecha");
+  boolean izq = estadoLuz(0,255,0,0,"Izquierda");
+  boolean arr = estadoLuz(0,0,255,0,"Arriba");
+  boolean abj = estadoLuz(0,0,0,255,"Abajo");
+}
+
+boolean estadoLuz(int valor_der, int valor_izq, int valor_arr, int valor_aba, String luz ){
+  digitalWrite(ledPin_der, valor_der);  
+  digitalWrite(ledPin_izq, valor_izq);
+  digitalWrite(ledPin_arr, valor_arr);
+  digitalWrite(ledPin_aba, valor_aba);
+  int lecturaSensor1a = analogRead(sensorPin_izq);  
+  int lecturaSensor2a= analogRead(sensorPin_der); 
+  int lecturaSensor3a = analogRead(sensorPin_arr); 
+  delay(200);
+  prenderLucesDigital(0);
+  int lecturaSensor1c = analogRead(sensorPin_izq);  
+  int lecturaSensor2c = analogRead(sensorPin_der); 
+  int lecturaSensor3c = analogRead(sensorPin_arr); 
+  delay(200);
+
+  if (lecturaSensor1c > lecturaSensor1a  && lecturaSensor2c > lecturaSensor2a && lecturaSensor3c > lecturaSensor3a){
+     Serial.print("OK Luz ");
+     Serial.println(luz);
+     return true;
+  } else {
+     Serial.println("NO Funciona luz ");
+     Serial.println(luz);
+     return false;
+  }
+
 }
