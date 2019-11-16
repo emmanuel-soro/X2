@@ -17,11 +17,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        <activity android:name=".EstadisticasActivity"></activity>
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true"
-        >
-        <activity android:name=".TomarFotoActivity"></activity>
+        android:usesCleartextTraffic="true">
+        
+        <activity android:name=".EstadisticasActivity"/>
+        <activity android:name=".TomarFotoActivity"/>
         <activity android:name=".NosotrosActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -51,6 +51,7 @@ public class EstadisticasActivity extends AppCompatActivity {
         chart.animateY(5000);
         BarData data = new BarData(bardataset);
         bardataset.setColors(ColorTemplate.COLORFUL_COLORS);
+        bardataset.setFormLineWidth(2.5f);
         chart.setData(data);
     }
 
