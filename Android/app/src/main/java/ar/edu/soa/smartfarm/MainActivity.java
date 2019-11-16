@@ -1,7 +1,6 @@
 package ar.edu.soa.smartfarm;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -20,11 +19,6 @@ public class MainActivity extends AppCompatActivity {
 
     private SensorManager sm;
 
-    private float acelVal;
-    private float acelLast;
-    private float shake;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -32,12 +26,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        sm.registerListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),SensorManager.SENSOR_DELAY_NORMAL);
-
-        acelVal = SensorManager.GRAVITY_EARTH;
-        acelLast = SensorManager.GRAVITY_EARTH;
-        shake = 0.00f;
-
         boton_tomar_foto = (ImageButton) findViewById(R.id.btnTomarFoto);
         boton_nosotros = (ImageButton) findViewById(R.id.btnNosotros);
 
@@ -61,21 +49,74 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStop() {
+        Parar_Sensores();
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Parar_Sensores();
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onPause() {
+        Parar_Sensores();
+        super.onPause();
+    }
+
+    @Override
+    protected void onRestart() {
+        Ini_Sensores();
+        super.onRestart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Ini_Sensores();
+    }
+
+    // Metodo para iniciar el acceso a los sensores
+    protected void Ini_Sensores() {
+        sm.registerListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
+        sm.registerListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_GYROSCOPE), SensorManager.SENSOR_DELAY_NORMAL);
+        sm.registerListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_PROXIMITY), SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    // Metodo para parar la escucha de los sensores
+    private void Parar_Sensores() {
+        sm.unregisterListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER));
+        sm.unregisterListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_GYROSCOPE));
+        sm.unregisterListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_PROXIMITY));
+    }
+
     private final SensorEventListener sensorListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
-            float x = sensorEvent.values[0];
-            float y = sensorEvent.values[1];
-            float z = sensorEvent.values[2];
+            switch(sensorEvent.sensor.getType()){
+                case Sensor.TYPE_ACCELEROMETER :
+                    checkAccelerometer(sensorEvent);
+                break;
+                case Sensor.TYPE_PROXIMITY :
+                    checkProximity(sensorEvent);
+                break;
+            }
+        }
 
-            acelLast = acelVal;
-            acelVal = (float) Math.sqrt((double) (x*x + y*y + z*z));
-            float delta = acelVal - acelLast;
-            shake = shake * 0.9f + delta;
-
-            if(shake > 12 ) {
+        public void checkAccelerometer( SensorEvent sensorEvent){
+            if (sensorEvent.values[0] > 12|| sensorEvent.values[1] > 12 || sensorEvent.values[2] > 12 ) {
                 Intent nosotrosIntent = new Intent(MainActivity.this, NosotrosActivity.class);
                 startActivity(nosotrosIntent);
+            }
+        }
+
+        public void checkProximity( SensorEvent sensorEvent){
+            if (sensorEvent.values[0] == 0) {
+                Intent fotoIntent = new Intent(MainActivity.this, TomarFotoActivity.class);
+                startActivity(fotoIntent);
             }
         }
 
