@@ -21,39 +21,28 @@ public class EstadisticasActivity extends AppCompatActivity {
 
         BarChart chart = findViewById(R.id.barchart);
 
-        ArrayList NoOfEmp = new ArrayList<>();
+        ArrayList<BarEntry> NoOfEmp = new ArrayList();
 
-        NoOfEmp.add(new BarEntry(945f, 0));
-        NoOfEmp.add(new BarEntry(1040f, 1));
-        NoOfEmp.add(new BarEntry(1133f, 2));
-        NoOfEmp.add(new BarEntry(1240f, 3));
-        NoOfEmp.add(new BarEntry(1369f, 4));
-        NoOfEmp.add(new BarEntry(1487f, 5));
-        NoOfEmp.add(new BarEntry(1501f, 6));
-        NoOfEmp.add(new BarEntry(1645f, 7));
-        NoOfEmp.add(new BarEntry(1578f, 8));
-        NoOfEmp.add(new BarEntry(1695f, 9));
+        NoOfEmp.add(new BarEntry(0, 945f));
+        NoOfEmp.add(new BarEntry(1, 1040f));
+        NoOfEmp.add(new BarEntry(2, 1133f));
+        NoOfEmp.add(new BarEntry(3, 1240f));
+        NoOfEmp.add(new BarEntry(4, 1369f));
+        NoOfEmp.add(new BarEntry(5, 1487f));
+        NoOfEmp.add(new BarEntry(6, 1501f));
+        NoOfEmp.add(new BarEntry(7, 1645f));
+        NoOfEmp.add(new BarEntry(8, 1578f));
+        NoOfEmp.add(new BarEntry(9, 1695f));
 
-        ArrayList year = new ArrayList();
+        BarDataSet bardataset = new BarDataSet(NoOfEmp, "Crecimiento");
 
-        year.add("2008");
-        year.add("2009");
-        year.add("2010");
-        year.add("2011");
-        year.add("2012");
-        year.add("2013");
-        year.add("2014");
-        year.add("2015");
-        year.add("2016");
-        year.add("2017");
-
-        BarDataSet bardataset = new BarDataSet(NoOfEmp, "No Of Employee");
-        chart.animateY(5000);
         BarData data = new BarData(bardataset);
-        bardataset.setColors(ColorTemplate.COLORFUL_COLORS);
-        bardataset.setFormLineWidth(2.5f);
+        bardataset.setColors(ColorTemplate.MATERIAL_COLORS);
+
+        chart.animateY(5000);
         chart.setData(data);
     }
+
 
     @Override
     protected void onDestroy() {
