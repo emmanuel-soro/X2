@@ -1,6 +1,7 @@
 package ar.edu.soa.smartfarm;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -12,15 +13,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.github.mikephil.charting.charts.BarChart;
+
 public class MainActivity extends AppCompatActivity {
 
     ImageButton boton_tomar_foto;
     ImageButton boton_nosotros;
+    ImageButton boton_estadisticas;
 
     private SensorManager sm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -28,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         boton_tomar_foto = (ImageButton) findViewById(R.id.btnTomarFoto);
         boton_nosotros = (ImageButton) findViewById(R.id.btnNosotros);
+        boton_estadisticas = (ImageButton) findViewById(R.id.btnEstadisticas);
 
         boton_tomar_foto.setOnClickListener(new View.OnClickListener() {
 
@@ -44,6 +50,15 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent nosotrosIntent = new Intent(MainActivity.this, NosotrosActivity.class);
                 startActivity(nosotrosIntent);
+            }
+        });
+
+        boton_estadisticas.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent estadisticasIntent = new Intent(MainActivity.this, EstadisticasActivity.class);
+                startActivity(estadisticasIntent);
             }
         });
 
@@ -96,24 +111,24 @@ public class MainActivity extends AppCompatActivity {
     private final SensorEventListener sensorListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
-            switch(sensorEvent.sensor.getType()){
-                case Sensor.TYPE_ACCELEROMETER :
+            switch (sensorEvent.sensor.getType()) {
+                case Sensor.TYPE_ACCELEROMETER:
                     checkAccelerometer(sensorEvent);
-                break;
-                case Sensor.TYPE_PROXIMITY :
+                    break;
+                case Sensor.TYPE_PROXIMITY:
                     checkProximity(sensorEvent);
-                break;
+                    break;
             }
         }
 
-        public void checkAccelerometer( SensorEvent sensorEvent){
-            if (sensorEvent.values[0] > 12|| sensorEvent.values[1] > 12 || sensorEvent.values[2] > 12 ) {
+        public void checkAccelerometer(SensorEvent sensorEvent) {
+            if (sensorEvent.values[0] > 12 || sensorEvent.values[1] > 12 || sensorEvent.values[2] > 12) {
                 Intent nosotrosIntent = new Intent(MainActivity.this, NosotrosActivity.class);
                 startActivity(nosotrosIntent);
             }
         }
 
-        public void checkProximity( SensorEvent sensorEvent){
+        public void checkProximity(SensorEvent sensorEvent) {
             if (sensorEvent.values[0] == 0) {
                 Intent fotoIntent = new Intent(MainActivity.this, TomarFotoActivity.class);
                 startActivity(fotoIntent);
