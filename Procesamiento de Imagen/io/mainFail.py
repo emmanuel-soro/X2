@@ -45,9 +45,6 @@ def procesar_imagen(ruta):
     
     return (cant_pix_blancos * 100) / cant_pix_totales
 
-
-# FIN DECLARACION DE FUNCIONES.
-
 # FUNCION MAIN
 
 """ Se produciran las imagenes paso por paso. Esto tiene solo uso para realizar tests y evidenciar que
