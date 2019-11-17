@@ -23,6 +23,7 @@
         <activity android:name=".EstadisticasActivity"/>
         <activity android:name=".TomarFotoActivity"/>
         <activity android:name=".NosotrosActivity" />
+        <activity android:name=".EstadoSensoresActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

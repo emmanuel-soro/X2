@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     ImageButton boton_tomar_foto;
     ImageButton boton_nosotros;
+    ImageButton boton_sensores;
     ImageButton boton_estadisticas;
 
     private SensorManager sm;
@@ -33,23 +34,22 @@ public class MainActivity extends AppCompatActivity {
         sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         boton_tomar_foto = (ImageButton) findViewById(R.id.btnTomarFoto);
         boton_nosotros = (ImageButton) findViewById(R.id.btnNosotros);
+        boton_sensores = (ImageButton) findViewById(R.id.btnEstadoSensores);
         boton_estadisticas = (ImageButton) findViewById(R.id.btnEstadisticas);
 
         boton_tomar_foto.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-
-                Intent fotoIntent = new Intent(MainActivity.this, TomarFotoActivity.class);
-                startActivity(fotoIntent);
+            Intent fotoIntent = new Intent(MainActivity.this, TomarFotoActivity.class);
+            startActivity(fotoIntent);
             }
         });
 
         boton_nosotros.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-
-                Intent nosotrosIntent = new Intent(MainActivity.this, NosotrosActivity.class);
-                startActivity(nosotrosIntent);
+            Intent nosotrosIntent = new Intent(MainActivity.this, NosotrosActivity.class);
+            startActivity(nosotrosIntent);
             }
         });
 
@@ -57,8 +57,17 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                Intent estadisticasIntent = new Intent(MainActivity.this, EstadisticasActivity.class);
-                startActivity(estadisticasIntent);
+            Intent estadisticasIntent = new Intent(MainActivity.this, EstadisticasActivity.class);
+            startActivity(estadisticasIntent);
+            }
+        });
+
+        boton_sensores.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+            Intent sensoresIntent = new Intent(MainActivity.this, EstadoSensoresActivity.class);
+            startActivity(sensoresIntent);
             }
         });
 

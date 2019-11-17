@@ -11,6 +11,6 @@ public class EstadoSensoresActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nosotros);
+        setContentView(R.layout.activity_estado_sensores);
     }
 }
