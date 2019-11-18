@@ -110,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
     // Metodo para parar la escucha de los sensores
     private void Parar_Sensores() {
         sm.unregisterListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER));
+        sm.unregisterListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_PROXIMITY));
     }
 
     private final SensorEventListener sensorListener = new SensorEventListener() {
