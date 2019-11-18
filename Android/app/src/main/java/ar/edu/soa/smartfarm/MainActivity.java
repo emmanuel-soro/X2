@@ -103,15 +103,13 @@ public class MainActivity extends AppCompatActivity {
     // Metodo para iniciar el acceso a los sensores
     protected void Ini_Sensores() {
         sm.registerListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
-        sm.registerListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_LIGHT), SensorManager.SENSOR_DELAY_NORMAL);
         sm.registerListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_PROXIMITY), SensorManager.SENSOR_DELAY_NORMAL);
+        sm.registerListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_LIGHT), SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     // Metodo para parar la escucha de los sensores
     private void Parar_Sensores() {
         sm.unregisterListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER));
-        sm.unregisterListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_LIGHT));
-        sm.unregisterListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_PROXIMITY));
     }
 
     private final SensorEventListener sensorListener = new SensorEventListener() {
@@ -131,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         public void checkAccelerometer(SensorEvent sensorEvent) {
+
             if (sensorEvent.values[0] > 12 || sensorEvent.values[1] > 12 || sensorEvent.values[2] > 12) {
                 Intent nosotrosIntent = new Intent(MainActivity.this, NosotrosActivity.class);
                 startActivity(nosotrosIntent);
