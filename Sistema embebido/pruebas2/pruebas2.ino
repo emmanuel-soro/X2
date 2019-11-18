@@ -74,6 +74,10 @@ void loop() {
   val = "Estado Tallo!";
   Serial.print('T');
   }
+  else if(req.indexOf("/dato?id=W") != -1){
+  val = "Estado Sensores!";
+  Serial.print('W');
+  }
   else{
   //Serial.println("Error.");
   client.stop();
