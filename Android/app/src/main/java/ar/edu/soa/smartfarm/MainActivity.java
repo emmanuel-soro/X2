@@ -1,7 +1,6 @@
 package ar.edu.soa.smartfarm;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -10,23 +9,22 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
-
-import com.github.mikephil.charting.charts.BarChart;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    private SensorManager sm;
     ImageButton boton_tomar_foto;
     ImageButton boton_nosotros;
     ImageButton boton_sensores;
     ImageButton boton_estadisticas;
-
-    private SensorManager sm;
+    String txt = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -70,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(sensoresIntent);
             }
         });
-
     }
 
     @Override
@@ -106,14 +103,14 @@ public class MainActivity extends AppCompatActivity {
     // Metodo para iniciar el acceso a los sensores
     protected void Ini_Sensores() {
         sm.registerListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
-        sm.registerListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_GYROSCOPE), SensorManager.SENSOR_DELAY_NORMAL);
+        sm.registerListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_LIGHT), SensorManager.SENSOR_DELAY_NORMAL);
         sm.registerListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_PROXIMITY), SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     // Metodo para parar la escucha de los sensores
     private void Parar_Sensores() {
         sm.unregisterListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER));
-        sm.unregisterListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_GYROSCOPE));
+        sm.unregisterListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_LIGHT));
         sm.unregisterListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_PROXIMITY));
     }
 
@@ -126,6 +123,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case Sensor.TYPE_PROXIMITY:
                     checkProximity(sensorEvent);
+                    break;
+                case Sensor.TYPE_LIGHT:
+                    checkLight(sensorEvent);
                     break;
             }
         }
@@ -141,6 +141,15 @@ public class MainActivity extends AppCompatActivity {
             if (sensorEvent.values[0] == 0) {
                 Intent fotoIntent = new Intent(MainActivity.this, TomarFotoActivity.class);
                 startActivity(fotoIntent);
+            }
+        }
+        public void checkLight(SensorEvent sensorEvent) {
+            float[] values1 = sensorEvent.values;
+            if ((Math.abs(values1[0]) > 1000)) {
+                txt += "Luminosidad\n";
+                txt += sensorEvent.values[0] + " Luz \n";
+                Toast.makeText(getBaseContext(), txt, Toast.LENGTH_SHORT).show();
+                Log.i("sensor", "TYPE_LIGHT running  \n");
             }
         }
 
