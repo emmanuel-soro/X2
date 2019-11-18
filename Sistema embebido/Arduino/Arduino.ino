@@ -49,7 +49,7 @@ void setup(){
 }
 
 void loop(){
-  /* 4 Estados de las luces 
+  // 4 Estados de las luces 
   if(!estadoPulsador()){
     checkSerialCom();
     if(data == 'F'){
@@ -58,8 +58,11 @@ void loop(){
     }
     if(data == 'T'){
       Serial.println("ENTRE ESTADO TALLO");
-      estadoTallo();
-      delay(5000);
+      int cant = 0;
+      while(cant<5000 && data == 'T'){
+        estadoTallo();
+        cant = cant + 1;
+        }
       }
     if(data == 'W'){
       Serial.println("ENTRE ESTADOS DE SENSORES Y LUCES");
@@ -68,12 +71,12 @@ void loop(){
       estadoLuces();
       delay(2000);
       } 
-    }*/   
+    }  
 
-      estadoSensores();
+     /* estadoSensores();
       delay(2000);
       estadoLuces();
-      delay(2000);
+      delay(2000);*/
 }
 
 void estadoReposo(){
@@ -84,7 +87,7 @@ boolean estadoPulsador(){
   if (digitalRead(pulsador) == HIGH) {
     prenderLucesDigital(valorHigh);
     return true;
-  }else{
+  }else if(data == 'R'){
     estadoReposo();
     return false;
   }
@@ -93,7 +96,7 @@ boolean estadoPulsador(){
 void estadoFollaje(){
   digitalWrite(ledPin_aba, valorOff);
   int cont = 0;
-  while(cont < 10000){
+  while(cont < 10000 && data == 'F'){
     dimerizarPines(sensorPin_der, ledPin_der);
     dimerizarPines(sensorPin_izq, ledPin_izq);
     dimerizarPines(sensorPin_arr, ledPin_arr);
