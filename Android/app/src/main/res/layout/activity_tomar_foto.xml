@@ -13,13 +13,60 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp">
 
+
+        <EditText
+            android:id="@+id/titleUltimaFoto"
+            android:layout_width="426dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:gravity="center"
+            android:inputType="none"
+            android:paddingTop="30dp"
+            android:text="Última foto"
+            android:textSize="22sp" />
+
         <ImageView
             android:id="@+id/imageDisplay"
             android:layout_width="430dp"
-            android:layout_height="427dp"
+            android:layout_height="352dp"
             android:paddingTop="-300dp"
             android:visibility="visible"
             tools:visibility="visible" />
+
+        <EditText
+            android:id="@+id/titleInformacionFoto"
+            android:layout_width="426dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:gravity="center"
+            android:inputType="none"
+            android:paddingTop="30dp"
+            android:text="Información de la foto"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/textInfoCamara"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="7dp"
+            android:text=" * Cámara:  \n    Utilizamos la cámara Vivotek IP8133 "
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textInfoEstado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="7dp"
+            android:text=" * Estado del sistema:  \n    Tallo "
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textInfoGeneral"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="7dp"
+            android:text=" * Procesamiento imagenes: \n    Se sacan dos fotos por día para analizar su crecimiento"
+            android:textSize="16sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

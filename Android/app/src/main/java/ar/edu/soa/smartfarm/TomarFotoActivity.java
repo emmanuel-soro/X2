@@ -65,7 +65,7 @@ public class TomarFotoActivity extends AppCompatActivity {
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.35:8087")
+                .baseUrl("http://192.168.0.14:8087")
                 .client(client)
                 .build();
 
