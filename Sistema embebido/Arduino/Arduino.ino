@@ -50,7 +50,9 @@ void setup(){
 
 void loop(){
   // 4 Estados de las luces 
-  if(!estadoPulsador()){
+  if (digitalRead(pulsador) == HIGH) {
+    prenderLucesDigital(valorHigh);
+  }else{
     checkSerialCom();
     if(data == 'F'){
       Serial.println("ENTRE ESTADO FOLLAJE");
@@ -64,6 +66,10 @@ void loop(){
         cant = cant + 1;
         }
       }
+    if(data == 'R'){
+      Serial.println("ENTRE ESTADO REPOSO");
+      estadoReposo();
+    }
     if(data == 'W'){
       Serial.println("ENTRE ESTADOS DE SENSORES Y LUCES");
       estadoSensores();
@@ -72,25 +78,10 @@ void loop(){
       delay(2000);
       } 
     }  
-
-     /* estadoSensores();
-      delay(2000);
-      estadoLuces();
-      delay(2000);*/
 }
 
 void estadoReposo(){
   prenderLucesAnalogico(valorLow);
-}
-
-boolean estadoPulsador(){
-  if (digitalRead(pulsador) == HIGH) {
-    prenderLucesDigital(valorHigh);
-    return true;
-  }else if(data == 'R'){
-    estadoReposo();
-    return false;
-  }
 }
 
 void estadoFollaje(){
