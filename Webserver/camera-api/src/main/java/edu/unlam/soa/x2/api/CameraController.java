@@ -12,6 +12,9 @@ import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -57,6 +60,23 @@ public class CameraController {
 
 		return Files.readAllBytes(Paths.get(photo.getAbsolutePath()));
 
+	}
+
+	@GetMapping(value = "/getLastPhoto", produces = MediaType.IMAGE_JPEG_VALUE)
+	public @ResponseBody byte[] getLastPhoto() throws IOException {
+
+		try {
+
+			List<String> files = Files.list(Paths.get("./photos")).map(Path::toFile).map(File::getAbsolutePath)
+					.sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+
+			System.out.println("Foto enviada " + files.get(0));
+
+			return Files.readAllBytes(Paths.get(files.get(0)));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@GetMapping("/processImage")
