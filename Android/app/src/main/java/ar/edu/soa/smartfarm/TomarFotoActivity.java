@@ -65,13 +65,12 @@ public class TomarFotoActivity extends AppCompatActivity {
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.14:8087")
+                .baseUrl("http://192.168.30.180:8087")
                 .client(client)
                 .build();
 
         RestService restService = retrofit.create(RestService.class);
-        Call<ResponseBody> call = restService.getPhoto("20191026121631");
-
+        Call<ResponseBody> call = restService.getLastPhoto("");
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -81,11 +80,8 @@ public class TomarFotoActivity extends AppCompatActivity {
                 System.out.println("Codigo respuesta " + response.code());
 
                 if (response.isSuccessful()) {
-
-                    // display the image data in a ImageView or save it
                     Bitmap bmp = BitmapFactory.decodeStream(response.body().byteStream());
                     imageView.setImageBitmap(bmp);
-
                 }
             }
 

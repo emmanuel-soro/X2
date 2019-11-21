@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
             float[] values1 = sensorEvent.values;
             if ((Math.abs(values1[0]) > 1000)) {
                 txt += "Luminosidad\n";
-                txt += sensorEvent.values[0] + " Luz \n";
+                txt += sensorEvent.values[0] + " Lux \n";
                 Toast.makeText(getBaseContext(), txt, Toast.LENGTH_SHORT).show();
                 Log.i("sensor", "TYPE_LIGHT running  \n");
             }

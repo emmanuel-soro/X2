@@ -108,7 +108,7 @@ public class EstadoSensoresActivity extends AppCompatActivity {
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.39")
+                .baseUrl("http://192.168.30.164")
                 .client(client)
                 .build();
 

@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="7dp"
-            android:text=" * Estado del sistema:  \n    Tallo "
+            android:text=" * Estado del sistema:  \n    Follaje "
             android:textSize="16sp" />
 
         <TextView
