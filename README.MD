@@ -183,9 +183,9 @@ Aquí incorporamos la cámara, las leds ya ubicadas (faltando la led BAJA), se r
 ![imagen1Prot7](https://i.imgur.com/UA2CwJR.png)
 
 ### Manual de Usuario
-•	El usuario ingresará a la aplicación Smart Farm desde su dispositivo Android (previamente descargada e instalada). 
+- El usuario ingresará a la aplicación Smart Farm desde su dispositivo Android (previamente descargada e instalada). 
 Versión mínima de Android: 4.4 KitKat
-•	El usuario podrá observar el estado de los sensores, obtener la última imagen de la planta o ver las estadísticas realizadas por el procesamiento de imagen.
+- El usuario podrá observar el estado de los sensores, obtener la última imagen de la planta o ver las estadísticas realizadas por el procesamiento de imagen.
 
 **Estado de los sensores**
 
