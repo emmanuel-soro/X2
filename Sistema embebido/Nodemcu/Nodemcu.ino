@@ -11,89 +11,119 @@
   --------------------------------------------------------------------------
 *****************************************************************************/
 
-
-/* Bibliotecas */
 #include <ESP8266WiFi.h>
 
-/* Conexion de red  */
-const char* wifiID = "Speedy-Fibra-F58CFB";
-const char* wifiPass= "2b8b4d39D6FaDd5a2Y97";
+const char* ssid = "SO Avanzados";
+const char* password = "SOA.2019";
+long int tiempoParaFoto = 60*1000;
 
-/* Conexion del servidor  */
-const char* ipServidor = "192.168.1.35";
+/* Flags de tiempo */
+unsigned long startMillis;
+unsigned long currentMillis;
+
+/* Web server del mcu */
+WiFiServer server(80);
+
+/* Conexion del servidor */
+const char* ipServidor = "192.168.30.151";
 const uint16_t puertoIpServidor = 8087;
 WiFiClient client;
 
-
-
-/* Modo de ejecucion */
-int timeoutConexion = 10;
-
-void setup() {
+void setup() 
+{
   Serial.begin(9600);
-  Serial.println("**** Bienvenido: Smart Farm ****");
-  delay(200);  
-}
- 
-void loop() {
-  delay(10000);
-  Serial.print("F");
-  delay(5000);
-  Serial.print("T");
-  delay(5000);
-  Serial.print("N"); // N de nada.
-  
-  /*if(conectar()){
-     Serial.println("");
-     Serial.println("Wifi ok!");
-     Serial.println("IP address: ");
-     Serial.println(WiFi.localIP());
-     Serial.println("------------------");
-     delay(300);
-     Serial.print("Inicializando Cliente: ");
-     if (iniciarCliente()) {        
-       /* Sacar imagen */        
-       /*client.print(String("GET /photo")
-       + " HTTP/1.1\r\n" +
-       "Host: 192.168.1.47:8087" + "\r\n" +
-       "Connection: keep-alive\r\n" +
-       "\r\n"       
-      );
-      //Serial.println("Todo bien, se saco la imagen");
-    }else{
-      //Serial.println("Error: No se saco la imagen");
-    }
-  }else{
-   //Serial.println("Error: No se pudo conecetar al Wifi");
-   client.stop();
-  }
-  //delay(10000); */  
-}
-
-bool conectar(){
-  //Serial.println("");
-  //Serial.print("Intentando conectar a:");
-  //Serial.println(wifiID);
-
-  WiFi.begin(wifiID,wifiPass);
-  WiFi.mode(WIFI_STA); //Modo cliente wifi  
-
-  while (WiFi.status() != WL_CONNECTED && (timeoutConexion > 0)){
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) 
+  {
     delay(500);
-    //Serial.print(".");
-    timeoutConexion--;
+    Serial.print(".");
   }
-
-  if (WiFi.status() == WL_CONNECTED){
-    return true;
-  } else{
-    //Serial.print("\nNo pudo conectarse a la red: ");    
-    //Serial.println(wifiID);
-    return false;
-  }
+  /* Inicio del Servidor web. */
+  server.begin();
+  /* Esta es la IP */
+  Serial.print("Esta es la IP para conectar: ");
+  Serial.print("http://");
+  Serial.print(WiFi.localIP());
+  Serial.println("/");
+  startMillis = millis();
 }
 
 bool iniciarCliente()
 {
   return client.connect(ipServidor, puertoIpServidor) ? true : false;
+}
+
+bool consultarPeticion(WiFiClient client)
+{
+  String val;
+  String req = client.readStringUntil('\r');
+  client.flush();
+  if (req.indexOf("/dato?id=F") != -1) 
+  {
+     val = "Estado Follaje!";
+     Serial.print('F');
+  }
+  else if (req.indexOf("/dato?id=R") != -1) 
+  {
+     val = "Estado Reposo!";
+     Serial.print('R');
+  }
+  else if (req.indexOf("/dato?id=T") != -1) 
+  {
+     val = "Estado Tallo!";
+     Serial.print('T');
+  }
+  else if(req.indexOf("/dato?id=W") != -1) 
+  {
+     val = "Estado Sensores!";
+     Serial.print('W');
+  }
+  else
+  {
+     client.stop();
+     return false;
+  }
+  return true;
+}
+
+void tomarImagen(WiFiClient client)
+{
+  //Serial.println("Sacando Foto");
+  client.print(String("GET /photo")
+  + " HTTP/1.1\r\n" 
+  + "Host: 192.168.30.151:8087" + "\r\n"
+  + "Connection: keep-alive\r\n" +
+  "\r\n"       
+  );
+  startMillis = millis();
+}
+
+void loop() 
+{
+  if(WiFi.status() != WL_CONNECTED)
+  {
+     WiFi.begin(ssid, password);
+  }
+  else
+  {
+     currentMillis = millis();
+     if(currentMillis - startMillis < tiempoParaFoto) 
+     {
+        WiFiClient client = server.available();
+        if(!client) 
+        {
+           return;
+        }
+        //Lee la información enviada por el cliente.
+        consultarPeticion(client);
+     }
+     else if (iniciarCliente()) 
+     {              
+        tomarImagen(client);
+     }
+     else
+     {
+        Serial.println("Error al sacar foto.");
+     }
+  }
 }
