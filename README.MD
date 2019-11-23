@@ -182,54 +182,29 @@ Aquí incorporamos la cámara, las leds ya ubicadas (faltando la led BAJA), se r
 
 ![imagen1Prot7](https://i.imgur.com/UA2CwJR.png)
 
+### Manual de Usuario
+•	El usuario ingresará a la aplicación Smart Farm desde su dispositivo Android (previamente descargada e instalada). 
+Versión mínima de Android: 4.4 KitKat
+•	El usuario podrá observar el estado de los sensores, obtener la última imagen de la planta o ver las estadísticas realizadas por el procesamiento de imagen.
 
+**Estado de los sensores**
 
-### Manual de Usuario v1.0:
+1. Desde el dispositivo Android en la aplicación SmartFarm, el usuario deberá ingresar a la actividad "Estado de los sensores".
+2. Se realizará la sincronizacion de arduino con el entorno creado en el dispositivo SmartFarm, donde se podra calibrar el estado de las leds. Los posibles estados que presenta el aplicativo es:
+    *  Estado Reposo / inicial
+    *  Estado de las leds
+    *  Estado Follaje
+    *  Estado Tallo
 
-**PRIMEROS PASOS**
+**Obtener reporte del crecimiento de la planta**
 
-*Conexión SmartFarm – Android*
-
-1. El usuario encenderá SmartFarm.
-2. El usuario ingresará a la aplicación SmartFarm en su dispositivo Android* (previamente descargada e instalada).
-3. *Pasos para que se conecte a la red (falta definir)*
-4. Luego de un tiempo pequeño, el dispositivo SmartFarm ya se encontrará conectado a la Red.
-
-* *Versión mínima de Android: a definir.*
-
-**EVENTOS**
-
-*Registrar Planta*
-
-1. Desde el dispositivo Android, el usuario podrá registrar plantas con los siguientes datos:
-    * Nombre (será su identificador, debe ser único).
-    * Imagen (opcional).
-2. El usuario oprime aceptar y se realizará el registro.
-
-*-Éste evento es necesario para llevar el monitoreo de distintas plantas y poder realizar los reportes de crecimiento.*
-
-**Apagar Dispositivo SmartFarm**
-
-1. Desde el dispositivo Android en la aplicación SmartFarm, el usuario deberá presionar el botón Apagar.
-2. Opcionalmente se podrá optar por apagar mediante shake (agitar el celular).
-3. Opcionalmente se podrá apagar mediante el botón Apagar/Prender dispuesto en el dispositivo SmartFarm.
-
-**Prender Dispositivo SmartFarm**
-
-1. Desde el dispositivo Android en la aplicación SmartFarm, el usuario deberá presionar el botón Prender.
-2. Opcionalmente se podrá optar por prender mediante shake (agitar el celular).
-3. Opcionalmente se podrá prender el dispositivo mediante el botón Apagar/Prender dispuesto en el dispositivo SmartFarm.
-
-**Obtener reporte de ritmo de Crecimiento de Planta**
-
-1. Desde el dispositivo Android en la aplicación SmartFarm, el usuario deberá ingresar a la actividad Obtener Reporte.
-2. El usuario deberá seleccionar la Planta que se encuentra en el dispositivo SmartFarm.
-3. El usuario deberá oprimir Aceptar.
-4. Se realizará la sincronización de la cámara con el entorno creado en el dispositivo SmartFarm, calibrando las Leds para obtener una luz correcta para tomar imágenes. Y se realizará el procesamiento de las mismas para obtener los datos:
-    *  Diámetro estimado del tallo.
+1. Desde el dispositivo Android en la aplicación SmartFarm, el usuario deberá ingresar a la actividad "Obtener estadísticas".
+2. Se realizará la sincronización de la cámara con el entorno creado en el dispositivo SmartFarm, calibrando las Leds para obtener una luz correcta para tomar imágenes. Y se realizará el procesamiento de las mismas para obtener los datos:
     *  Nivel de follaje
 
 Que se utilizarán para realizar una comparativa en caso de que existan datos anteriores sobre dicha planta, y se los informará. De lo contrario, se informará el Diámetro estimado del tallo y el nivel de follaje.
 
-
-
+**Sensores utilizados**
+-	El sensor TYPE_ACCELEROMETER mide la aceleración aplicada al dispositivo. Cuando detectamos un shake se accederá a la Activity “Nosotros” que muestra la información de los alumnos que cursan la materia
+-	El sensor TYPE_PROXIMITY proporciona la distancia entre el dispositivo y otro objeto. Cuando detectamos que el sensor de proximidad del teléfono este tapado se accederá a la Activity “Obtener foto”
+-	El sensor TYPE_LIGHT proporciona la luz ambiente en unidad de medida lux. Cuando se detecta que hay mucha luz ambiente, se muestra un mensaje por pantalla mostrando exactamente su valor.
