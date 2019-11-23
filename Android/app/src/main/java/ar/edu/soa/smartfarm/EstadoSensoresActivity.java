@@ -111,10 +111,7 @@ public class EstadoSensoresActivity extends AppCompatActivity {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Toast toast1 =
-                        Toast.makeText(getApplicationContext(),
-                                 "OK", Toast.LENGTH_SHORT);
-
+                Toast toast1 = Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_SHORT);
                 toast1.show();
             }
 

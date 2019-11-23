@@ -13,5 +13,7 @@ public interface RestService {
     @GET("/dato")
     Call<ResponseBody> getDato(@Query("id") String value);
 
+    @GET("/getDatabase")
+    Call<ResponseBody> getDatabase();
 
 }
