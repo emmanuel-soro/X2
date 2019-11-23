@@ -124,6 +124,8 @@ Utilizaremos una fuente adicional como fuente de energía externa para poder ali
 
 ![diagramaFisico](https://i.imgur.com/2lbGpZT.png)
 
+### Diagrama Esquemático
+
 ![diagramaEsquematico](https://i.imgur.com/D04Codu.png)
 
 ### Diagrama Lógico
