@@ -12,7 +12,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -130,10 +132,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         public void checkAccelerometer(SensorEvent sensorEvent) {
-
             if (sensorEvent.values[0] > 12 || sensorEvent.values[1] > 12 || sensorEvent.values[2] > 12) {
-                Intent nosotrosIntent = new Intent(MainActivity.this, NosotrosActivity.class);
-                startActivity(nosotrosIntent);
+                Intent sensoresIntent = new Intent(getBaseContext(), EstadoSensoresActivity.class);
+                sensoresIntent.putExtra("var", "on");
+                startActivity(sensoresIntent);
             }
         }
 

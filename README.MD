@@ -207,6 +207,6 @@ Versión mínima de Android: 4.4 KitKat
 Que se utilizarán para realizar una comparativa en caso de que existan datos anteriores sobre dicha planta, y se los informará. De lo contrario, se informará el Diámetro estimado del tallo y el nivel de follaje.
 
 **Sensores utilizados**
--	El sensor TYPE_ACCELEROMETER mide la aceleración aplicada al dispositivo. Cuando detectamos un shake se accederá a la Activity “Nosotros” que muestra la información de los alumnos que cursan la materia
+-	El sensor TYPE_ACCELEROMETER mide la aceleración aplicada al dispositivo. Cuando detectamos un shake se accederá a la Activity “Estado de los sensores” y activara el estado tallo.
 -	El sensor TYPE_PROXIMITY proporciona la distancia entre el dispositivo y otro objeto. Cuando detectamos que el sensor de proximidad del teléfono este tapado se accederá a la Activity “Obtener foto”
 -	El sensor TYPE_LIGHT proporciona la luz ambiente en unidad de medida lux. Cuando se detecta que hay mucha luz ambiente, se muestra un mensaje por pantalla mostrando exactamente su valor.

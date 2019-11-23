@@ -1,21 +1,13 @@
 package ar.edu.soa.smartfarm;
 
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import ar.edu.soa.interfaces.RestService;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
@@ -24,10 +16,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Body;
-import retrofit2.http.Headers;
-import retrofit2.http.POST;
 
 public class EstadoSensoresActivity extends AppCompatActivity {
 
@@ -44,6 +32,11 @@ public class EstadoSensoresActivity extends AppCompatActivity {
         switchFollaje = (Switch) findViewById(R.id.switchFollaje);
         switchReposo = (Switch) findViewById(R.id.switchReposo);
         switchTallo = (Switch) findViewById(R.id.switchTallo);
+
+        String value2 = getIntent().getStringExtra("var");
+        if(("on").equals(value2)){
+            switchTallo.setChecked(true);
+        }
 
         switchSensor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
