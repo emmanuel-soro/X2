@@ -15,7 +15,8 @@
 
 const char* ssid = "SO Avanzados";
 const char* password = "SOA.2019";
-long int tiempoParaFoto = 60*1000;
+char lastState = 'X';
+long int tiempoParaFoto = 12*1000;
 
 /* Flags de tiempo */
 unsigned long startMillis;
@@ -62,21 +63,25 @@ bool consultarPeticion(WiFiClient client)
   {
      val = "Estado Follaje!";
      Serial.print('F');
+     lastState = 'F';
   }
   else if (req.indexOf("/dato?id=R") != -1) 
   {
      val = "Estado Reposo!";
      Serial.print('R');
+     lastState = 'R';
   }
   else if (req.indexOf("/dato?id=T") != -1) 
   {
      val = "Estado Tallo!";
      Serial.print('T');
+     lastState = 'T';
   }
   else if(req.indexOf("/dato?id=W") != -1) 
   {
      val = "Estado Sensores!";
      Serial.print('W');
+     lastState = 'W';
   }
   else
   {
@@ -90,9 +95,9 @@ void tomarImagen(WiFiClient client)
 {
   //Serial.println("Sacando Foto");
   client.print(String("GET /photo")
-  + " HTTP/1.1\r\n" 
-  + "Host: 192.168.30.151:8087" + "\r\n"
-  + "Connection: keep-alive\r\n" +
+  + " HTTP/1.1\r\n" + 
+  "Host: 192.168.30.151:8087" + "\r\n" + 
+  "Connection: keep-alive\r\n" +
   "\r\n"       
   );
   startMillis = millis();
@@ -119,7 +124,10 @@ void loop()
      }
      else if (iniciarCliente()) 
      {              
+        Serial.print('F');
         tomarImagen(client);
+        delay(2000);
+        Serial.print(lastState);
      }
      else
      {
