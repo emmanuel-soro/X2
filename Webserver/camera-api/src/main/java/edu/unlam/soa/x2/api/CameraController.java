@@ -45,8 +45,9 @@ public class CameraController {
 
 		try {
 			Runtime.getRuntime().exec(cmd);
-		} catch (IOException e) {
 
+			this.processImage(photoName);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
@@ -79,8 +80,7 @@ public class CameraController {
 		}
 	}
 
-	@GetMapping("/processImage")
-	public ResponseEntity<String> processImage(@RequestParam String name) {
+	public void processImage(String name) {
 
 		String result = null;
 		String in = null;
@@ -117,10 +117,7 @@ public class CameraController {
 		} catch (IOException e) {
 			System.out.println("Exception happened - here's what I know: ");
 			e.printStackTrace();
-			return new ResponseEntity<String>(result, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
-		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
 
 }
