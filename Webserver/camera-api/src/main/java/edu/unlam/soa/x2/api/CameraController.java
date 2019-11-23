@@ -89,7 +89,7 @@ public class CameraController {
 
 			File pythonProgram = new File("./image-processing/mainFail.py");
 
-			File photo = new File("./photos/" + name);
+			File photo = new File("./photos/" + name + ".jpg");
 
 			String[] cmd = { "python", pythonProgram.getAbsolutePath(), photo.getAbsolutePath() };
 
@@ -102,8 +102,10 @@ public class CameraController {
 
 			while ((in = stdInput.readLine()) != null) {
 				result = in;
-				System.out.println(in);
 			}
+
+			result = result + " " + name;
+			System.out.println("Resultado: " + result);
 
 			File database = new File("./image-processing/results.txt");
 
