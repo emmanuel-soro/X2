@@ -1,7 +1,6 @@
 package ar.edu.soa.smartfarm;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
