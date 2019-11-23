@@ -65,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="7dp"
-            android:text=" * Procesamiento imagenes: \n    Se sacan dos fotos por día para analizar su crecimiento"
+            android:text=" * Procesamiento imagenes: \n    Se saca fotos cada 1 minuto para analizar su crecimiento"
             android:textSize="16sp" />
     </LinearLayout>
 

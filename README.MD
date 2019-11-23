@@ -136,7 +136,7 @@ Utilizaremos una fuente adicional como fuente de energía externa para poder ali
 
 ### Diagrama de Conexiones
 
-![diagramaConex](https://imgur.com/i1r7j5J)
+![diagramaConex](https://i.imgur.com/i1r7j5J.png)
 
 ### Prototipo 1:
 

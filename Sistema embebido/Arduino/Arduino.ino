@@ -32,7 +32,7 @@ int lecturaSensor = 0;
 
 #include <SoftwareSerial.h>
 SoftwareSerial SerialEsp(2, 3); // RX - TX
-char data = "W";
+char data = 'F';
 
 void setup(){  
   Serial.begin(19200);
@@ -47,47 +47,61 @@ void setup(){
   /* Inicialiazo pulsador */
   pinMode(pulsador, INPUT);
 }
+int efe = 'F';
 
-void loop(){
-  // 4 Estados de las luces 
-  if (digitalRead(pulsador) == HIGH) {
-    prenderLucesDigital(valorHigh);
-  }else{
-    checkSerialCom();
-    if(data == 'F'){
-      Serial.println("ENTRE ESTADO FOLLAJE");
-      estadoFollaje();
-    }
-    if(data == 'T'){
-      Serial.println("ENTRE ESTADO TALLO");
-      int cant = 0;
-      while(cant<5000 && data == 'T'){
-        estadoTallo();
-        cant = cant + 1;
-        }
-      }
-    if(data == 'R'){
-      Serial.println("ENTRE ESTADO REPOSO");
-      estadoReposo();
-    }
-    if(data == 'W'){
-      Serial.println("ENTRE ESTADOS DE SENSORES Y LUCES");
-      estadoSensores();
-      delay(2000);
-      estadoLuces();
-      delay(2000);
-      } 
-    }  
+void loop()
+{
+  if (digitalRead(pulsador) == HIGH) 
+  {
+     prenderLucesDigital(valorHigh);
+  }
+  else
+  {
+     checkSerialCom();
+     switch (data)
+     {
+        case 'R': 
+          Serial.println("ENTRE ESTADO REPOSO");
+          estadoReposo();
+          break;
+        case 'F': 
+          Serial.println("ENTRE ESTADO FOLLAJE");
+          estadoFollaje();
+          break;
+        case 'W':  
+          Serial.println("ENTRE ESTADOS DE SENSORES Y LUCES");
+          estadoSensores();
+          delay(2000);
+          estadoLuces();
+          delay(2000);
+          break;     
+        case 'T': 
+          Serial.println("ENTRE ESTADO TALLO");
+          int cant = 0;
+          while(cant<5000 && data == 'T')
+          {
+            estadoTallo();
+            cant = cant + 1;
+          } 
+          break;
+        default:
+          Serial.println("defecto");
+          break;       
+     }
+  }
 }
 
-void estadoReposo(){
+void estadoReposo()
+{
   prenderLucesAnalogico(valorLow);
 }
 
-void estadoFollaje(){
+void estadoFollaje()
+{
   digitalWrite(ledPin_aba, valorOff);
   int cont = 0;
-  while(cont < 10000 && data == 'F'){
+  while(cont < 10000 && data == 'F')
+  {
     dimerizarPines(sensorPin_der, ledPin_der);
     dimerizarPines(sensorPin_izq, ledPin_izq);
     dimerizarPines(sensorPin_arr, ledPin_arr);
@@ -95,46 +109,58 @@ void estadoFollaje(){
   }
 }
 
-void prenderLucesDigital(int valor){
+void prenderLucesDigital(int valor)
+{
   digitalWrite(ledPin_der, valor);
   digitalWrite(ledPin_izq, valor);
   digitalWrite(ledPin_arr, valor);
   digitalWrite(ledPin_aba, valor);
 }
 
-void prenderLucesAnalogico(int valor){
+void prenderLucesAnalogico(int valor)
+{
   analogWrite(ledPin_der, valor);
   analogWrite(ledPin_izq, valor);
   analogWrite(ledPin_arr, valor);
   analogWrite(ledPin_aba, valor);
 }
 
-void dimerizarPines(int sensor, int pin){
+void dimerizarPines(int sensor, int pin)
+{
   int lecturaSensor = analogRead(sensor); 
-  if(lecturaSensor >= 255){
+  if(lecturaSensor >= 255)
+  {
     analogWrite(pin, 0);
-  }else{
+  }
+  else
+  {
     analogWrite(pin, 255 - lecturaSensor);
   }
 }
 
-void estadoTallo(){
+void estadoTallo()
+{
   digitalWrite(ledPin_der, valorOff);
   digitalWrite(ledPin_izq, valorOff);
   digitalWrite(ledPin_arr, valorOff);
   digitalWrite(ledPin_aba, valorHigh);
 }
 
-void checkSerialCom(){
-  if(SerialEsp.available() > 0){ // Checkeamos si hay informacion disponible.
-    while(SerialEsp.available() > 0){
+void checkSerialCom()
+{
+  // Checkeamos si hay informacion disponible.
+  if(SerialEsp.available() > 0)
+  { 
+    while(SerialEsp.available() > 0)
+    {
       data = (char)SerialEsp.read(); // Leemos del puerto serial.
       Serial.print(data);
     }
   }
 }
 
-void estadoSensores(){
+void estadoSensores()
+{
   prenderLucesDigital(valorHigh);
   delay(200);
   int lecturaSensor1 = analogRead(sensorPin_izq);  
@@ -145,12 +171,10 @@ void estadoSensores(){
   int lecturaSensor1b = analogRead(sensorPin_izq);  
   int lecturaSensor2b = analogRead(sensorPin_der); 
   int lecturaSensor3b = analogRead(sensorPin_arr); 
-
- if (lecturaSensor1 - lecturaSensor1b > 50 )
+  if (lecturaSensor1 - lecturaSensor1b > 50 )
     Serial.println("Sensor 1 OK");
- else
+  else
     Serial.println("Sensor 1 No funciona");
-
   if (lecturaSensor2 - lecturaSensor2b > 50 )
     Serial.println("Sensor 2 OK");
   else
@@ -160,17 +184,18 @@ void estadoSensores(){
     Serial.println("Sensor 3 OK");
  else
     Serial.println("Sensor 3 No funciona");    
-    
 }
 
-void estadoLuces(){
+void estadoLuces()
+{
   boolean der = estadoLuz(255,0,0,0,"Derecha");
   boolean izq = estadoLuz(0,255,0,0,"Izquierda");
   boolean arr = estadoLuz(0,0,255,0,"Arriba");
   boolean abj = estadoLuz(0,0,0,255,"Abajo");
 }
 
-boolean estadoLuz(int valor_der, int valor_izq, int valor_arr, int valor_aba, String luz ){
+boolean estadoLuz(int valor_der, int valor_izq, int valor_arr, int valor_aba, String luz )
+{
   digitalWrite(ledPin_der, valor_der);  
   digitalWrite(ledPin_izq, valor_izq);
   digitalWrite(ledPin_arr, valor_arr);
@@ -185,14 +210,16 @@ boolean estadoLuz(int valor_der, int valor_izq, int valor_arr, int valor_aba, St
   int lecturaSensor3c = analogRead(sensorPin_arr); 
   delay(200);
 
-  if (lecturaSensor1c > lecturaSensor1a  && lecturaSensor2c > lecturaSensor2a && lecturaSensor3c > lecturaSensor3a){
+  if (lecturaSensor1c > lecturaSensor1a  && lecturaSensor2c > lecturaSensor2a && lecturaSensor3c > lecturaSensor3a)
+  {
      Serial.print("OK Luz ");
      Serial.println(luz);
      return true;
-  } else {
+  }
+  else 
+  {
      Serial.println("NO Funciona luz ");
      Serial.println(luz);
      return false;
   }
-
 }
