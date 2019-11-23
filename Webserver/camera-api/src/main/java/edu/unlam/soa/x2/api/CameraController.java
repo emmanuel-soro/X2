@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -41,13 +42,15 @@ public class CameraController {
 		String[] cmd = { absolutePath, "-y", "-i", "rtsp://admin:admin@192.168.1.195:554/h264/ch1/main/av_stream",
 				"-vframes", "1", photosAbsolutePath + "\\" + photoName + ".jpg" };
 
-		System.out.println("Foto tomada con nombre " + photoName + ".jpg");
-
 		try {
-			Runtime.getRuntime().exec(cmd);
+			Process process = Runtime.getRuntime().exec(cmd);
+			process.waitFor();
+			process.destroy();
+			System.out.println("Foto tomada con nombre " + photoName + ".jpg");
 
 			this.processImage(photoName);
-		} catch (IOException e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
@@ -80,32 +83,42 @@ public class CameraController {
 		}
 	}
 
-	public void processImage(String name) {
+	@GetMapping("/processImage")
+	public ResponseEntity<String> processImage(@RequestParam String name) {
 
 		String result = null;
-		String in = null;
 
 		try {
 
 			File pythonProgram = new File("./image-processing/mainFail.py");
-
 			File photo = new File("./photos/" + name + ".jpg");
 
 			String[] cmd = { "python", pythonProgram.getAbsolutePath(), photo.getAbsolutePath() };
 
-			Process p = Runtime.getRuntime().exec(cmd);
+			Process process = Runtime.getRuntime().exec(cmd);
 
-			BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
+			process.waitFor();
 
-			// read the output from the command
-			System.out.println("Standard output of the command:\n");
+			BufferedReader stdInput = new BufferedReader(new InputStreamReader(process.getInputStream()));
+			BufferedReader stdErr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
-			while ((in = stdInput.readLine()) != null) {
-				result = in;
+			String line;
+			while ((line = stdInput.readLine()) != null) {
+				result = line;
 			}
+			stdInput.close();
 
-			result = result + " " + name;
+			while ((line = stdErr.readLine()) != null) {
+				System.err.println(line);
+			}
+			stdErr.close();
+
+			process.waitFor();
+			process.destroy();
+
+			result = name + " " + result;
 			System.out.println("Resultado: " + result);
+			System.out.println();
 
 			File database = new File("./image-processing/results.txt");
 
@@ -114,10 +127,37 @@ public class CameraController {
 			Files.write(path, Arrays.asList(result), StandardCharsets.UTF_8,
 					Files.exists(path) ? StandardOpenOption.APPEND : StandardOpenOption.CREATE);
 
-		} catch (IOException e) {
-			System.out.println("Exception happened - here's what I know: ");
+			return new ResponseEntity<String>(result, HttpStatus.OK);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(result, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@GetMapping("/getDatabase")
+	public @ResponseBody List<Resultado> getDatabase() {
+
+		File file = new File("./image-processing/results.txt");
+
+		List<String> list = new ArrayList<>(0);
+		List<Resultado> listPersona = new ArrayList<>();
+
+		try (BufferedReader br = Files.newBufferedReader(Paths.get(file.getAbsolutePath()))) {
+
+			list = br.lines().collect(Collectors.toList());
+
+			for (String elemento : list) {
+
+				String[] res = elemento.split(" ");
+
+				listPersona.add(new Resultado(res[0], res[1]));
+			}
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return listPersona;
 	}
 
 }
