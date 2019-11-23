@@ -35,6 +35,7 @@ public class EstadoSensoresActivity extends AppCompatActivity {
         String value2 = getIntent().getStringExtra("var");
         if(("on").equals(value2)){
             switchTallo.setChecked(true);
+            enviarPeticion("T");
         }
 
         switchSensor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -119,11 +120,6 @@ public class EstadoSensoresActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast toast2 =
-                        Toast.makeText(getApplicationContext(),
-                                "ERROR", Toast.LENGTH_SHORT);
-
-                toast2.show();
             }
         });
     }
