@@ -124,8 +124,6 @@ Utilizaremos una fuente adicional como fuente de energía externa para poder ali
 
 ![diagramaFisico](https://i.imgur.com/2lbGpZT.png)
 
-### Diagrama Esquemático
-
 ![diagramaEsquematico](https://i.imgur.com/D04Codu.png)
 
 ### Diagrama Lógico
@@ -138,7 +136,7 @@ Utilizaremos una fuente adicional como fuente de energía externa para poder ali
 
 ### Diagrama de Conexiones
 
-![diagramaConex](https://imgur.com/i1r7j5J)
+![diagramaConex](https://i.imgur.com/i1r7j5J.png)
 
 ### Prototipo 1:
 
