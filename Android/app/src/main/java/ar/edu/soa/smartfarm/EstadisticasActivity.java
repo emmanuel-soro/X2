@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Toast;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -45,10 +46,10 @@ public class EstadisticasActivity extends AppCompatActivity {
     }
 
     public void loadInfoDataBase(){
-        //new Thread(new Runnable() {
-         //   private final Handler handler = new Handler() ;
-        //    @Override
-           // public void run() {
+        new Thread(new Runnable() {
+            private final Handler handler = new Handler() ;
+            @Override
+           public void run() {
                 RestService restService = retrofit.create(RestService.class);
                 Call<String> call = restService.getDatabase();
                 call.enqueue(new Callback<String>() {
@@ -76,27 +77,45 @@ public class EstadisticasActivity extends AppCompatActivity {
                     public void onFailure(Call<String> call, Throwable t) {
                     }
                 });
-              //  handler.postDelayed(this, 5000);
-           // }
-        //}).start();
+                handler.postDelayed(this, 5000);
+           }
+        }).start();
     }
 
     public void createChart(ArrayList<ResultadoEstadisticas> arrayList){
         BarChart chart = findViewById(R.id.barchart);
         ArrayList<BarEntry> chartEstadisticas = new ArrayList();
+        ArrayList<String> labels = new ArrayList<String>();
 
-        for (int j = 0; j < arrayList.size(); j++) {
-            String x = arrayList.get(j).getNombre();
-            //Integer y = Integer.parseInt(arrayList.get(j).getValor());
-            chartEstadisticas.add(new BarEntry(0, 12));
+        for (int i = 0; i < arrayList.size(); i++) {
+            String x = arrayList.get(i).getNombre();
+            String date = formatDate(x);
+            labels.add("2016");
+            labels.add("2017");
+            labels.add("2018");
+            Float value = Float.parseFloat(arrayList.get(i).getValor()) *100;
+            chartEstadisticas.add(new BarEntry(i, value));
         }
 
         BarDataSet bardataset = new BarDataSet(chartEstadisticas, "Crecimiento");
         BarData data = new BarData(bardataset);
         bardataset.setColors(ColorTemplate.MATERIAL_COLORS);
 
-        chart.animateY(5000);
+        chart.animateY(0);
         chart.setData(data);
+        chart.setFitBars(true);
+    }
+
+    public String formatDate(String date){
+        String año = date.substring(0,4);
+        String mes = date.substring(4,6);
+        String dia = date.substring(6,8);
+        String hora = date.substring(8,10);
+        String minutos = date.substring(10,12);
+        String segundos = date.substring(12,14);
+
+        return hora +   minutos + segundos;
+
     }
 
     @Override
