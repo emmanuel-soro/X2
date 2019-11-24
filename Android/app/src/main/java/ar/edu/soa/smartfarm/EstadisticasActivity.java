@@ -85,14 +85,10 @@ public class EstadisticasActivity extends AppCompatActivity {
     public void createChart(ArrayList<ResultadoEstadisticas> arrayList){
         BarChart chart = findViewById(R.id.barchart);
         ArrayList<BarEntry> chartEstadisticas = new ArrayList();
-        ArrayList<String> labels = new ArrayList<String>();
 
         for (int i = 0; i < arrayList.size(); i++) {
             String x = arrayList.get(i).getNombre();
             String date = formatDate(x);
-            labels.add("2016");
-            labels.add("2017");
-            labels.add("2018");
             Float value = Float.parseFloat(arrayList.get(i).getValor()) *100;
             chartEstadisticas.add(new BarEntry(i, value));
         }
@@ -114,7 +110,7 @@ public class EstadisticasActivity extends AppCompatActivity {
         String minutos = date.substring(10,12);
         String segundos = date.substring(12,14);
 
-        return hora +   minutos + segundos;
+        return "Fecha: " + dia + '-' + mes + '-' +año + "\n" + "Hora: " + hora +   minutos + segundos;
 
     }
 
