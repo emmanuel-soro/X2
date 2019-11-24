@@ -1,27 +1,23 @@
 package ar.edu.soa.interfaces;
 
 public class ResultadoEstadisticas {
-    private int nombre;
-    private int valor;
+    private String nombre, valor;
 
-    public ResultadoEstadisticas(int nombre, int valor) {
-        this.nombre = nombre;
-        this.valor = valor;
-    }
-
-    public int getValor() {
-        return valor;
-    }
-
-    public void setValor(int valor) {
-        this.valor = valor;
-    }
-
-    public int getNombre() {
+    public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(int nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public String getValor() {
+        return valor;
+    }
+
+    public void setValor(String valor) {
+        this.valor = valor;
+    }
+
+
 }
