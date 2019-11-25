@@ -9,11 +9,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,7 +34,12 @@ public class CameraController {
 	@GetMapping("/photo")
 	public ResponseEntity<String> takePhoto() {
 
-		String photoName = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+		// String photoName =
+		// LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+
+		long timeInMilis = Instant.now().toEpochMilli();
+
+		String photoName = String.valueOf(timeInMilis);
 
 		File file = new File("./ffmpeg/bin/ffmpeg.exe");
 		String absolutePath = file.getAbsolutePath();
