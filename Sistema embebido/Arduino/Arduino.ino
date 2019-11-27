@@ -30,11 +30,12 @@
 SoftwareSerial SerialEsp(2, 3); // RX - TX
 
 char data = ' '; //Variable global que se utiliza para capturar las peticiones del nodemcu por el puerto serie "SerialEsp".
+char estadoAnterior = ' ';
 
 /* Flags de tiempo */
 unsigned long startMillis;
 unsigned long currentMillis;
-unsigned long tiempoFotoDiaria = 2000;
+unsigned long tiempoFotoDiaria = 2500;
 
 void setup(){  
   Serial.begin(19200);
@@ -122,6 +123,7 @@ void estadoFotoDiaria()
    * TR. Sin el ciclo, las luces parpadean.
    */
   digitalWrite(ledPin_aba, valorOff);
+  startMillis = millis();
   currentMillis = millis();
   while(currentMillis - startMillis < tiempoFotoDiaria){
     currentMillis = millis();
@@ -130,7 +132,11 @@ void estadoFotoDiaria()
     dimerizarPines(sensorPin_izq, ledPin_izq);
     dimerizarPines(sensorPin_arr, ledPin_arr);
   }
-  startMillis = millis();
+  if(data == 'D')
+  {
+    data = estadoAnterior;
+  }
+  
 }
 
 void prenderLucesDigital(int valor)
@@ -179,8 +185,13 @@ void checkSerialCom()
       char aux;
       aux = (char)SerialEsp.read(); // Leemos del puerto serial.
       /* Verificamos que la peticion sea correcta */
-      if(aux == 'R' || aux == 'F' || aux == 'T' || aux == 'W' || aux == 'D')
+      if(aux == 'R' || aux == 'F' || aux == 'T' || aux == 'W')
         data = aux;
+      if(aux == 'D')
+      {
+        estadoAnterior = data;
+        data = aux;
+      }
       Serial.print(data);
     }
   }

@@ -11,16 +11,14 @@
 *****************************************************************************/
 #include <ESP8266WiFi.h>
 
-//const char* ssid = "SO Avanzados";
-//const char* password = "SOA.2019";
 /* Variables de conexion a Red */
-const char* ssid = "Telecentro-8b60";
-const char* password = "GJZWWNHNMZ4Q";
+const char* ssid = "SO Avanzados";
+const char* password = "SOA.2019";
 
 /* Variables de uso global */
 char lastState = 'X';
-long int tiempoParaFoto = 600*1000;
-long int tiempoMaxParaFoto = 605*1000;
+long int tiempoParaFoto = 60*1000;
+long int tiempoMaxParaFoto = 65*1000;
 
 /* Flags de tiempo */
 unsigned long startMillis;
@@ -30,7 +28,7 @@ unsigned long currentMillis;
 WiFiServer server(80);
 
 /* Conexion del servidor */
-const char* ipServidor = "192.168.30.151";
+const char* ipServidor = "192.168.30.180";
 const uint16_t puertoIpServidor = 8087;
 WiFiClient client;
 
@@ -65,27 +63,22 @@ bool consultarPeticion(WiFiClient client)
   if (req.indexOf("/dato?id=F") != -1) 
   {
      Serial.print('F');
-     lastState = 'F';
   }
   else if (req.indexOf("/dato?id=R") != -1) 
   {
      Serial.print('R');
-     lastState = 'R';
   }
   else if (req.indexOf("/dato?id=T") != -1) 
   {
      Serial.print('T');
-     lastState = 'T';
   }
   else if(req.indexOf("/dato?id=W") != -1) 
   {
      Serial.print('W');
-     lastState = 'W';
   }
   else if(req.indexOf("/dato?id=D") != -1) //LO DEJAMOS PARA PROBAR - SE HACE AUTOMATICAMENTE
   {
      Serial.print('D');
-     lastState = 'D';
   }
   else
   {
@@ -99,7 +92,7 @@ void tomarImagen(WiFiClient client)
 {
   client.print(String("GET /photo")
   + " HTTP/1.1\r\n" + 
-  "Host: " + ipServidor +":8087" + "\r\n" + 
+  "Host: 192.168.30.180:8087" + "\r\n" + 
   "Connection: keep-alive\r\n" +
   "\r\n"       
   );
@@ -138,8 +131,7 @@ void loop()
      else
      {
       /* Si se excede tiempoMaxParaFoto y aun no se consiguio una respuesta
-       * del servidor, se produce un timeout y deja de realizar peticiones.
-       */
+       * del servidor, se produce un timeout y deja de realizar peticiones. */
         startMillis = millis();
      }
   }
