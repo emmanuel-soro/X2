@@ -13,10 +13,14 @@
 
 #include <ESP8266WiFi.h>
 
-const char* ssid = "SO Avanzados";
-const char* password = "SOA.2019";
+//const char* ssid = "SO Avanzados";
+//const char* password = "SOA.2019";
+
+const char* ssid = "Telecentro-8b60";
+const char* password = "GJZWWNHNMZ4Q";
 char lastState = 'X';
-long int tiempoParaFoto = 12*1000;
+
+long int tiempoParaFoto = 3600*1000;
 
 /* Flags de tiempo */
 unsigned long startMillis;
@@ -39,9 +43,9 @@ void setup()
     delay(500);
     Serial.print(".");
   }
-  /* Inicio del Servidor web. */
+  /* Iniciamos el Servidor web. */
   server.begin();
-  /* Esta es la IP */
+  /* Muestramos la IP */
   Serial.print("Esta es la IP para conectar: ");
   Serial.print("http://");
   Serial.print(WiFi.localIP());
@@ -56,30 +60,26 @@ bool iniciarCliente()
 
 bool consultarPeticion(WiFiClient client)
 {
-  String val;
+  //String val; // val es inservible
   String req = client.readStringUntil('\r');
   client.flush();
   if (req.indexOf("/dato?id=F") != -1) 
   {
-     val = "Estado Follaje!";
      Serial.print('F');
      lastState = 'F';
   }
   else if (req.indexOf("/dato?id=R") != -1) 
   {
-     val = "Estado Reposo!";
      Serial.print('R');
      lastState = 'R';
   }
   else if (req.indexOf("/dato?id=T") != -1) 
   {
-     val = "Estado Tallo!";
      Serial.print('T');
      lastState = 'T';
   }
   else if(req.indexOf("/dato?id=W") != -1) 
   {
-     val = "Estado Sensores!";
      Serial.print('W');
      lastState = 'W';
   }
@@ -126,7 +126,12 @@ void loop()
      {              
         Serial.print('F');
         tomarImagen(client);
+        /* Este delay es necesario ya que este es el estado donde se toma la foto diaria.
+         * Debe ser bloqueante debido a la necesidad de que el SE quede en estado FOLLAJE
+         * para que la camara tome correctamente la imagen.
+         */
         delay(2000);
+        /* Una vez tomada la foto, vuelve al ultimo estado en el que se encontraba */
         Serial.print(lastState);
      }
      else

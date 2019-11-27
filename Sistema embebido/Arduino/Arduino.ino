@@ -28,11 +28,10 @@
 #define valorLow           15
 #define valorOff           0
 
-int lecturaSensor = 0;
-
 #include <SoftwareSerial.h>
 SoftwareSerial SerialEsp(2, 3); // RX - TX
-char data = 'F';
+
+char data = ' '; //Variable global que se utiliza para capturar las peticiones del nodemcu por el puerto serie "SerialEsp".
 
 void setup(){  
   Serial.begin(19200);
@@ -47,7 +46,6 @@ void setup(){
   /* Inicialiazo pulsador */
   pinMode(pulsador, INPUT);
 }
-int efe = 'F';
 
 void loop()
 {
@@ -69,23 +67,17 @@ void loop()
           estadoFollaje();
           break;
         case 'W':  
-          Serial.println("ENTRE ESTADOS DE SENSORES Y LUCES");
+          Serial.println("ENTRE ESTADOS DE EVALUACION DE SENSORES Y LUCES");
           estadoSensores();
-          delay(2000);
           estadoLuces();
-          delay(2000);
           break;     
         case 'T': 
           Serial.println("ENTRE ESTADO TALLO");
-          int cant = 0;
-          while(cant<5000 && data == 'T')
-          {
-            estadoTallo();
-            cant = cant + 1;
-          } 
+          estadoTallo();
           break;
         default:
           Serial.println("defecto");
+          estadoReposo();
           break;       
      }
   }
@@ -99,13 +91,16 @@ void estadoReposo()
 void estadoFollaje()
 {
   digitalWrite(ledPin_aba, valorOff);
-  int cont = 0;
-  while(cont < 10000 && data == 'F')
+  /* Ciclo necesario ya que la dimerizacion es en TR, no es bloqueante.
+   * Ante algun cambio debido a una peticion del mcu o de presionar el
+   * boton, sale del ciclo.
+   */
+  while(data == 'F' && digitalRead(pulsador) == LOW)
   {
+    checkSerialCom();
     dimerizarPines(sensorPin_der, ledPin_der);
     dimerizarPines(sensorPin_izq, ledPin_izq);
     dimerizarPines(sensorPin_arr, ledPin_arr);
-    cont = cont + 1;
   }
 }
 
@@ -148,7 +143,6 @@ void estadoTallo()
 
 void checkSerialCom()
 {
-  // Checkeamos si hay informacion disponible.
   if(SerialEsp.available() > 0)
   { 
     while(SerialEsp.available() > 0)
@@ -161,16 +155,28 @@ void checkSerialCom()
 
 void estadoSensores()
 {
+  /* Ponemos las luces en valor alto */
   prenderLucesDigital(valorHigh);
-  delay(200);
+  
+  delay(200); //Tiempo para que los sensores LDR se estabilicen
+  
+  /* Leemos las lecturas de los sensores LDR */
   int lecturaSensor1 = analogRead(sensorPin_izq);  
   int lecturaSensor2 = analogRead(sensorPin_der); 
-  int lecturaSensor3 = analogRead(sensorPin_arr);  
+  int lecturaSensor3 = analogRead(sensorPin_arr);
+  
+  /* Ponemos las luces en valor bajo */  
   prenderLucesDigital(0);
-  delay(200);
+  
+  delay(200); //Tiempo para que los sensores LDR se estabilicen
+  
+  /* Leemos las nuevas lecturas de los sensores LDR */
   int lecturaSensor1b = analogRead(sensorPin_izq);  
   int lecturaSensor2b = analogRead(sensorPin_der); 
-  int lecturaSensor3b = analogRead(sensorPin_arr); 
+  int lecturaSensor3b = analogRead(sensorPin_arr);
+  
+  /* Comparamos las distintas lecturas de cada sensor
+   * si no variaron signfica que el sensor no funciona  */ 
   if (lecturaSensor1 - lecturaSensor1b > 50 )
     Serial.println("Sensor 1 OK");
   else
@@ -179,10 +185,9 @@ void estadoSensores()
     Serial.println("Sensor 2 OK");
   else
     Serial.println("Sensor 2 No funciona");
-
- if (lecturaSensor3 - lecturaSensor3b > 50 )
+  if (lecturaSensor3 - lecturaSensor3b > 50 )
     Serial.println("Sensor 3 OK");
- else
+  else
     Serial.println("Sensor 3 No funciona");    
 }
 
@@ -196,20 +201,31 @@ void estadoLuces()
 
 boolean estadoLuz(int valor_der, int valor_izq, int valor_arr, int valor_aba, String luz )
 {
+  /* Ponemos las luces en los valores determinados por parametro. La led que se probara
+   * tendra un valor maximo, mientras que las demas tendran un valor minimo. */
   digitalWrite(ledPin_der, valor_der);  
   digitalWrite(ledPin_izq, valor_izq);
   digitalWrite(ledPin_arr, valor_arr);
   digitalWrite(ledPin_aba, valor_aba);
+
+  /* Capturamos las lecturas de los sensores LDR */
   int lecturaSensor1a = analogRead(sensorPin_izq);  
   int lecturaSensor2a= analogRead(sensorPin_der); 
   int lecturaSensor3a = analogRead(sensorPin_arr); 
-  delay(200);
-  prenderLucesDigital(0);
-  int lecturaSensor1c = analogRead(sensorPin_izq);  
-  int lecturaSensor2c = analogRead(sensorPin_der); 
-  int lecturaSensor3c = analogRead(sensorPin_arr); 
-  delay(200);
 
+  delay(200); //Tiempo prudencial para estabilizar los sensores LDR
+
+  /* Ponemos a todas las luces en valor minimo */
+  prenderLucesDigital(0);
+  
+  /* Capturamos las nuevas lecturas de los sensores LDR */
+  int lecturaSensor1c = analogRead(sensorPin_izq);
+  int lecturaSensor2c = analogRead(sensorPin_der);
+  int lecturaSensor3c = analogRead(sensorPin_arr);
+  
+  delay(200); //Tiempo prudencial para estabilizar los sensores LDR
+  
+  /* Si las lecturas cumplen la condicion, la luz funciona. De lo contrario, no funciona */
   if (lecturaSensor1c > lecturaSensor1a  && lecturaSensor2c > lecturaSensor2a && lecturaSensor3c > lecturaSensor3a)
   {
      Serial.print("OK Luz ");
@@ -218,7 +234,7 @@ boolean estadoLuz(int valor_der, int valor_izq, int valor_arr, int valor_aba, St
   }
   else 
   {
-     Serial.println("NO Funciona luz ");
+     Serial.print("NO Funciona luz ");
      Serial.println(luz);
      return false;
   }
