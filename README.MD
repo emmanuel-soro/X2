@@ -116,17 +116,17 @@ Utilizaremos una fuente adicional como fuente de energía externa para poder ali
 
 ### Diagrama Funcional
 
-![diagramaFuncional](https://i.imgur.com/jS8N7Tj.png)
+![diagramaFuncional](https://i.imgur.com/L0rkcrC.png)
 
 ### Diagrama Físico
 
-![diagramaFisico](https://i.imgur.com/2lbGpZT.png)
+![diagramaFisico](https://i.imgur.com/DG2rUNW.png)
 
-![diagramaEsquematico](https://i.imgur.com/D04Codu.png)
+![diagramaEsquematico](https://i.imgur.com/6O2bzt1.png)
 
 ### Diagrama Lógico
 
-![diagramaLog](https://i.imgur.com/Q1zch5a.png)
+![diagramaLog](https://i.imgur.com/gdvfz0U.png)
 
 ### Diagrama de Software
 
