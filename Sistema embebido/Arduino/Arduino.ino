@@ -118,7 +118,8 @@ void estadoFotoDiaria()
   /* Funcion para tomar la foto diaria. Se espera un tiempo para
    * Sincronizar la camara con el ambiente del SE. Cualquier peticion
    * sera recibida. Que el boton este prendido no genera un conflicto
-   * al tomar la imagen.
+   * al tomar la imagen. Ciclo necesario debido a la dimerizacion en
+   * TR. Sin el ciclo, las luces parpadean.
    */
   digitalWrite(ledPin_aba, valorOff);
   currentMillis = millis();
