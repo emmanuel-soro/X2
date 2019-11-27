@@ -60,33 +60,33 @@ public class EstadisticasActivity extends AppCompatActivity {
 //
 //            @Override
 //            public void run() {
-                RestService restService = retrofit.create(RestService.class);
-                Call<String> call = restService.getDatabase();
-                call.enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        try {
-                            ArrayList<ResultadoEstadisticas> arrayList = new ArrayList<>();
-                            JSONArray jsonArray = new JSONArray(response.body().toString());
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                ResultadoEstadisticas estadisticas = new ResultadoEstadisticas();
-                                JSONObject dataobj = jsonArray.getJSONObject(i);
-                                estadisticas.setNombre(dataobj.getString("nombre"));
-                                estadisticas.setValor(dataobj.getString("valor"));
-                                arrayList.add(estadisticas);
-                            }
-
-                            createChart(arrayList);
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+        RestService restService = retrofit.create(RestService.class);
+        Call<String> call = restService.getDatabase();
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                try {
+                    ArrayList<ResultadoEstadisticas> arrayList = new ArrayList<>();
+                    JSONArray jsonArray = new JSONArray(response.body().toString());
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        ResultadoEstadisticas estadisticas = new ResultadoEstadisticas();
+                        JSONObject dataobj = jsonArray.getJSONObject(i);
+                        estadisticas.setNombre(dataobj.getString("nombre"));
+                        estadisticas.setValor(dataobj.getString("valor"));
+                        arrayList.add(estadisticas);
                     }
 
-                    @Override
-                    public void onFailure(Call<String> call, Throwable t) {
-                    }
-                });
+                    createChart(arrayList);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+            }
+        });
 //                handler.postDelayed(this, 5000);
 //            }
 //        }).start();
@@ -100,18 +100,10 @@ public class EstadisticasActivity extends AppCompatActivity {
         Long fechaInicial = Long.valueOf(estadisticas.get(0).getNombre());
 
         for (int i = 0; i < estadisticas.size(); i++) {
-            String x = estadisticas.get(i).getNombre();
-
             Float fecha = Float.valueOf(estadisticas.get(i).getNombre());
             Float value = Float.valueOf(estadisticas.get(i).getValor());
-
-            System.out.println("Fecha: " + (fecha - fechaInicial));
-            System.out.println("Valor: " + (value * 1f));
-            chartEstadisticas.add(new BarEntry(fecha - fechaInicial, value * 1f));
+            chartEstadisticas.add(new BarEntry(i * 1f, Float.valueOf(value)));
         }
-        System.out.println();
-
-
         BarDataSet bardataset = new BarDataSet(chartEstadisticas, "Crecimiento");
         bardataset.setColors(ColorTemplate.MATERIAL_COLORS);
 
@@ -124,7 +116,6 @@ public class EstadisticasActivity extends AppCompatActivity {
 
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setValueFormatter(new FormatoEjeX(fechaInicial));
         xAxis.setLabelCount(chartEstadisticas.size());
 
         YAxis yAxisLeft = chart.getAxisLeft();

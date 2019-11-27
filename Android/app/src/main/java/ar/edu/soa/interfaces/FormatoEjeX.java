@@ -16,7 +16,7 @@ public class FormatoEjeX extends ValueFormatter {
 
     public FormatoEjeX(long referenceTimestamp) {
         this.referenceTimestamp = referenceTimestamp;
-        this.mDataFormat = new SimpleDateFormat("HH:mm:ss", Locale.GERMANY);
+        this.mDataFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.GERMANY);
         this.mDate = new Date();
     }
 
@@ -31,6 +31,7 @@ public class FormatoEjeX extends ValueFormatter {
     @Override
     public String getFormattedValue(float value) {
         // convertedTimestamp = originalTimestamp - referenceTimestamp
+        System.out.println("formateo: "+value);
         long convertedTimestamp = (long) value;
 
         // Retrieve original timestamp
