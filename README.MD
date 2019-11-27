@@ -8,15 +8,13 @@
 
 ## Proyecto: SmartFarm :seedling::electron:
 ### Descripción
-SmartFarm pretende monitorear el crecimiento de las plantas en cuanto a su follaje y a su tronco/tallo, mediante procesamiento de imágenes, y reportar estadísticas del crecimiento en base a los datos obtenidos a la aplicación mobile desarrollada en android.
+SmartFarm pretende monitorear el crecimiento de las plantas en cuanto a su follaje, mediante procesamiento de imágenes, y reportar estadísticas del crecimiento en base a los datos obtenidos a la aplicación mobile desarrollada en android.
 
 El follaje de una planta es un termino que se utiliza para designar al conjunto de ramas cargadas de hojas, flores y frutos.
 Puede ser:
 - *Aplanado*: Cuando las hojas abiertas se extienden de uno y otro lado sobre el mismo plano.
 - *Redondo o Cilíndrico*: Cuando las hojas se extienden alrededor de las ramas.
 - *Cruzado*: Cuando las ramas presentan las hojas opuestas.
-
-El tallo es el órgano de la planta que sostiene a las hojas, flores y frutos. En la mayoría de las plantas, tiene características cilíndricas. En este proyecto, se reconocerá, mediante el procesamiento de imágenes tomadas con la cámara, el diámetro aproximado del tallo epígeo (tallos que crecen por encima de la tierra). 
 
 ### Materiales
 
