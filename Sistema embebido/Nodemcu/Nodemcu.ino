@@ -1,4 +1,3 @@
-
 /****************************************************************************
   --------------------------------------------------------------------------
   | Proyecto      : Smart Farm
@@ -10,17 +9,18 @@
   |                 ~ Soro, Emmanuel (DNI: 33.778.589)
   --------------------------------------------------------------------------
 *****************************************************************************/
-
 #include <ESP8266WiFi.h>
 
 //const char* ssid = "SO Avanzados";
 //const char* password = "SOA.2019";
-
+/* Variables de conexion a Red */
 const char* ssid = "Telecentro-8b60";
 const char* password = "GJZWWNHNMZ4Q";
-char lastState = 'X';
 
-long int tiempoParaFoto = 3600*1000;
+/* Variables de uso global */
+char lastState = 'X';
+long int tiempoParaFoto = 600*1000;
+long int tiempoMaxParaFoto = 605*1000;
 
 /* Flags de tiempo */
 unsigned long startMillis;
@@ -45,7 +45,7 @@ void setup()
   }
   /* Iniciamos el Servidor web. */
   server.begin();
-  /* Muestramos la IP */
+  /* Mostramos la IP */
   Serial.print("Esta es la IP para conectar: ");
   Serial.print("http://");
   Serial.print(WiFi.localIP());
@@ -60,7 +60,6 @@ bool iniciarCliente()
 
 bool consultarPeticion(WiFiClient client)
 {
-  //String val; // val es inservible
   String req = client.readStringUntil('\r');
   client.flush();
   if (req.indexOf("/dato?id=F") != -1) 
@@ -93,7 +92,6 @@ bool consultarPeticion(WiFiClient client)
 
 void tomarImagen(WiFiClient client)
 {
-  //Serial.println("Sacando Foto");
   client.print(String("GET /photo")
   + " HTTP/1.1\r\n" + 
   "Host: 192.168.30.151:8087" + "\r\n" + 
@@ -119,24 +117,32 @@ void loop()
         {
            return;
         }
-        //Lee la información enviada por el cliente.
+        /* Lee la información enviada por el cliente. */
         consultarPeticion(client);
      }
-     else if (iniciarCliente()) 
+     else if (iniciarCliente())
      {              
         Serial.print('F');
         tomarImagen(client);
         /* Este delay es necesario ya que este es el estado donde se toma la foto diaria.
          * Debe ser bloqueante debido a la necesidad de que el SE quede en estado FOLLAJE
-         * para que la camara tome correctamente la imagen.
+         * para que la camara tome correctamente la imagen. Que el SE este con el boton
+         * prendido no genera un conflicto al tomar la imagen.
          */
         delay(2000);
         /* Una vez tomada la foto, vuelve al ultimo estado en el que se encontraba */
         Serial.print(lastState);
      }
-     else
+     else if(currentMillis - startMillis < tiempoMaxParaFoto)
      {
         Serial.println("Error al sacar foto.");
+     }
+     else
+     {
+      /* Si se excede tiempoMaxParaFoto y aun no se consiguio una respuesta
+       * del servidor, se produce un timeout y deja de realizar peticiones.
+       */
+        startMillis = millis();
      }
   }
 }
