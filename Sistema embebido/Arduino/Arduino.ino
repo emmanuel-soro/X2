@@ -31,6 +31,11 @@ SoftwareSerial SerialEsp(2, 3); // RX - TX
 
 char data = ' '; //Variable global que se utiliza para capturar las peticiones del nodemcu por el puerto serie "SerialEsp".
 
+/* Flags de tiempo */
+unsigned long startMillis;
+unsigned long currentMillis;
+unsigned long tiempoFotoDiaria = 2000;
+
 void setup(){  
   Serial.begin(19200);
   SerialEsp.begin(9600);
@@ -43,6 +48,8 @@ void setup(){
 
   /* Inicialiazo pulsador */
   pinMode(pulsador, INPUT);
+
+  startMillis = millis();
 }
 
 void loop()
@@ -73,6 +80,10 @@ void loop()
           Serial.println("ENTRE ESTADO TALLO");
           estadoTallo();
           break;
+        case 'D':
+          Serial.println("FOTO DIARIA");
+          estadoFotoDiaria();
+          break;
         default:
           Serial.println("defecto");
           estadoReposo();
@@ -100,6 +111,25 @@ void estadoFollaje()
     dimerizarPines(sensorPin_izq, ledPin_izq);
     dimerizarPines(sensorPin_arr, ledPin_arr);
   }
+}
+
+void estadoFotoDiaria()
+{
+  /* Funcion para tomar la foto diaria. Se espera un tiempo para
+   * Sincronizar la camara con el ambiente del SE. Cualquier peticion
+   * sera recibida. Que el boton este prendido no genera un conflicto
+   * al tomar la imagen.
+   */
+  digitalWrite(ledPin_aba, valorOff);
+  currentMillis = millis();
+  while(currentMillis - startMillis < tiempoFotoDiaria){
+    currentMillis = millis();
+    checkSerialCom();
+    dimerizarPines(sensorPin_der, ledPin_der);
+    dimerizarPines(sensorPin_izq, ledPin_izq);
+    dimerizarPines(sensorPin_arr, ledPin_arr);
+  }
+  startMillis = millis();
 }
 
 void prenderLucesDigital(int valor)
@@ -148,7 +178,7 @@ void checkSerialCom()
       char aux;
       aux = (char)SerialEsp.read(); // Leemos del puerto serial.
       /* Verificamos que la peticion sea correcta */
-      if(aux == 'R' || aux == 'F' || aux == 'T' || aux == 'W')
+      if(aux == 'R' || aux == 'F' || aux == 'T' || aux == 'W' || aux == 'D')
         data = aux;
       Serial.print(data);
     }

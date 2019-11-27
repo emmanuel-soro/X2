@@ -82,6 +82,11 @@ bool consultarPeticion(WiFiClient client)
      Serial.print('W');
      lastState = 'W';
   }
+  else if(req.indexOf("/dato?id=D") != -1) //PRUEBA - BORRAR
+  {
+     Serial.print('D');
+     lastState = 'D';
+  }
   else
   {
      client.stop();
@@ -94,7 +99,7 @@ void tomarImagen(WiFiClient client)
 {
   client.print(String("GET /photo")
   + " HTTP/1.1\r\n" + 
-  "Host: 192.168.30.151:8087" + "\r\n" + 
+  "Host: " + ipServidor +":8087" + "\r\n" + 
   "Connection: keep-alive\r\n" +
   "\r\n"       
   );
@@ -122,16 +127,9 @@ void loop()
      }
      else if (iniciarCliente())
      {              
-        Serial.print('F');
+        /* Tomamos la foto diaria */
+        Serial.print('D');
         tomarImagen(client);
-        /* Este delay es necesario ya que este es el estado donde se toma la foto diaria.
-         * Debe ser bloqueante debido a la necesidad de que el SE quede en estado FOLLAJE
-         * para que la camara tome correctamente la imagen. Que el SE este con el boton
-         * prendido no genera un conflicto al tomar la imagen.
-         */
-        delay(2000);
-        /* Una vez tomada la foto, vuelve al ultimo estado en el que se encontraba */
-        Serial.print(lastState);
      }
      else if(currentMillis - startMillis < tiempoMaxParaFoto)
      {
