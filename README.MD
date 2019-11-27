@@ -132,7 +132,7 @@ Utilizaremos una fuente adicional como fuente de energía externa para poder ali
 
 ### Diagrama de Software
 
-![diagramaSW](https://i.imgur.com/u1256z1.png)
+![diagramaSW](https://i.imgur.com/OAWJ0Yu.png)
 
 ### Diagrama de Conexiones
 
