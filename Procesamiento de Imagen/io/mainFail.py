@@ -38,22 +38,12 @@ def procesar_imagen(ruta):
 
     cant_pix_blancos = cv2.countNonZero(binaria) #Obtengo la cantidad de pixeles blancos
     cant_pix_totales = binaria.size
-    ##print("Cantidad de pixeles blancos:", cant_pix_blancos)
-    ##print("Cantidad total de pixeles:", cant_pix_totales)
     
     #Retornamos el % de follaje
     
     return (cant_pix_blancos * 100) / cant_pix_totales
 
 # FUNCION MAIN
-
-""" Se produciran las imagenes paso por paso. Esto tiene solo uso para realizar tests y evidenciar que
-    esta haciendo el algoritmo de procesamiento. """
-
-#Sera la ruta a donde se encuentra la imagen
-#ruta = "C:/Users/rnsal/Documents/imagenes/" 
-#Nombre de la imagen a procesar
-#imgName = "im2.jpg"
 
 res = procesar_imagen(sys.argv[1])
 print(res)
