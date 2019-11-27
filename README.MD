@@ -185,7 +185,9 @@ Aquí incorporamos la cámara, las leds ya ubicadas (faltando la led BAJA), se r
 ### Manual de Usuario
 - El usuario ingresará a la aplicación Smart Farm desde su dispositivo Android (previamente descargada e instalada). 
 Versión mínima de Android: 4.4 KitKat
-- El usuario podrá observar el estado de los sensores, obtener la última imagen de la planta o ver las estadísticas realizadas por el procesamiento de imagen.
+- El usuario podrá observar el estado de los sensores, obtener la última imagen de la planta, ver las estadísticas realizadas por el procesamiento de imagen y obtener información sobre los desarrolladores de la aplicación.
+
+![imagenMainActivity](https://i.imgur.com/Q5x5mr8.png)
 
 **Estado de los sensores**
 
@@ -196,6 +198,15 @@ Versión mínima de Android: 4.4 KitKat
     *  Estado Follaje
     *  Estado Tallo
 
+![imagenActivitySensores](https://i.imgur.com/GhbfzBs.png)
+
+**Tomar Foto**
+
+1. Desde el dispositivo Android en la aplicación SmartFarm, el usuario deberá ingresar a la actividad "Tomar Foto".
+2. Se realizará una comunicación con el servidor para obtener la última foto de la planta, la cual se mostrará en la actividad "Tomar Foto" con información adicional.
+
+![imagenActivityTomarFoto](https://i.imgur.com/vyH6ubo.png)
+
 **Obtener reporte del crecimiento de la planta**
 
 1. Desde el dispositivo Android en la aplicación SmartFarm, el usuario deberá ingresar a la actividad "Obtener estadísticas".
@@ -204,7 +215,15 @@ Versión mínima de Android: 4.4 KitKat
 
 Que se utilizarán para realizar una comparativa en caso de que existan datos anteriores sobre dicha planta, y se los informará. De lo contrario, se informará el Diámetro estimado del tallo y el nivel de follaje.
 
+![imagenActivityEstadisticas](https://i.imgur.com/GrKc9nN.png)
+
 **Sensores utilizados**
 -	El sensor TYPE_ACCELEROMETER mide la aceleración aplicada al dispositivo. Cuando detectamos un shake se accederá a la Activity “Estado de los sensores” y activara el estado tallo.
 -	El sensor TYPE_PROXIMITY proporciona la distancia entre el dispositivo y otro objeto. Cuando detectamos que el sensor de proximidad del teléfono este tapado se accederá a la Activity “Obtener foto”
 -	El sensor TYPE_LIGHT proporciona la luz ambiente en unidad de medida lux. Cuando se detecta que hay mucha luz ambiente, se muestra un mensaje por pantalla mostrando exactamente su valor.
+
+**Obtener información de los desarrolladores**
+
+1. Desde el dispositivo Android en la aplicación SmartFarm, el usuario deberá ingresar a la actividad "Nosotros".
+
+![imagenActivityNosotros](https://i.imgur.com/5j9cUTN.png)
