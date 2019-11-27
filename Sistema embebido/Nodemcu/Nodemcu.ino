@@ -82,7 +82,7 @@ bool consultarPeticion(WiFiClient client)
      Serial.print('W');
      lastState = 'W';
   }
-  else if(req.indexOf("/dato?id=D") != -1) //PRUEBA - BORRAR
+  else if(req.indexOf("/dato?id=D") != -1) //LO DEJAMOS PARA PROBAR - SE HACE AUTOMATICAMENTE
   {
      Serial.print('D');
      lastState = 'D';
