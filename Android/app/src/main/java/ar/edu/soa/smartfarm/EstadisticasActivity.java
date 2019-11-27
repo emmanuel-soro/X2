@@ -97,7 +97,7 @@ public class EstadisticasActivity extends AppCompatActivity {
         BarChart chart = findViewById(R.id.barchart);
         List<BarEntry> chartEstadisticas = new ArrayList();
 
-        Float fechaInicial = Float.valueOf(estadisticas.get(0).getNombre());
+        Long fechaInicial = Long.valueOf(estadisticas.get(0).getNombre());
 
         for (int i = 0; i < estadisticas.size(); i++) {
             String x = estadisticas.get(i).getNombre();
@@ -124,7 +124,7 @@ public class EstadisticasActivity extends AppCompatActivity {
 
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setValueFormatter(new FormatoEjeX());
+        xAxis.setValueFormatter(new FormatoEjeX(fechaInicial));
         xAxis.setLabelCount(chartEstadisticas.size());
 
         YAxis yAxisLeft = chart.getAxisLeft();
