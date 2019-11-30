@@ -199,40 +199,47 @@ void checkSerialCom()
 
 void estadoSensores()
 {
-  /* Ponemos las luces en valor alto */
-  prenderLucesDigital(valorHigh);
+  tiempoEstabilizacion = 100; //Tiempo para que los sensores LDR se estabilicen
+  startMillis = millis();
+  currentMillis = millis();
+  if(currentMillis - startMillis < tiempoEstabilizacion)
+  {
+    /* Ponemos las luces en valor alto */
+    currentMillis = millis();
+    prenderLucesDigital(valorHigh);
+  }
+  else{
+    currentMillis = millis();
+    /* Leemos las lecturas de los sensores LDR */
+    int lecturaSensor1 = analogRead(sensorPin_izq);  
+    int lecturaSensor2 = analogRead(sensorPin_der); 
+    int lecturaSensor3 = analogRead(sensorPin_arr);
+    
+    /* Ponemos las luces en valor bajo */  
+    prenderLucesDigital(0);
+    if(currentMillis - startMillis < (tiempoEstabilizacion * 2))
+    {
+      /* Leemos las nuevas lecturas de los sensores LDR */
+      int lecturaSensor1b = analogRead(sensorPin_izq);  
+      int lecturaSensor2b = analogRead(sensorPin_der); 
+      int lecturaSensor3b = analogRead(sensorPin_arr);
   
-  delay(100); //Tiempo para que los sensores LDR se estabilicen
-  
-  /* Leemos las lecturas de los sensores LDR */
-  int lecturaSensor1 = analogRead(sensorPin_izq);  
-  int lecturaSensor2 = analogRead(sensorPin_der); 
-  int lecturaSensor3 = analogRead(sensorPin_arr);
-  
-  /* Ponemos las luces en valor bajo */  
-  prenderLucesDigital(0);
-  
-  delay(100); //Tiempo para que los sensores LDR se estabilicen
-  
-  /* Leemos las nuevas lecturas de los sensores LDR */
-  int lecturaSensor1b = analogRead(sensorPin_izq);  
-  int lecturaSensor2b = analogRead(sensorPin_der); 
-  int lecturaSensor3b = analogRead(sensorPin_arr);
-  
-  /* Comparamos las distintas lecturas de cada sensor
-   * si no variaron signfica que el sensor no funciona  */ 
-  if (lecturaSensor1 - lecturaSensor1b > 50 )
-    Serial.println("Sensor 1 OK");
-  else
-    Serial.println("Sensor 1 No funciona");
-  if (lecturaSensor2 - lecturaSensor2b > 50 )
-    Serial.println("Sensor 2 OK");
-  else
-    Serial.println("Sensor 2 No funciona");
-  if (lecturaSensor3 - lecturaSensor3b > 50 )
-    Serial.println("Sensor 3 OK");
-  else
-    Serial.println("Sensor 3 No funciona");    
+      /* Comparamos las distintas lecturas de cada sensor
+       * si no variaron signfica que el sensor no funciona  */ 
+      if (lecturaSensor1 - lecturaSensor1b > 50 )
+        Serial.println("Sensor 1 OK");
+      else
+        Serial.println("Sensor 1 No funciona");
+      if (lecturaSensor2 - lecturaSensor2b > 50 )
+        Serial.println("Sensor 2 OK");
+      else
+        Serial.println("Sensor 2 No funciona");
+      if (lecturaSensor3 - lecturaSensor3b > 50 )
+        Serial.println("Sensor 3 OK");
+      else
+        Serial.println("Sensor 3 No funciona");
+    }
+  }    
 }
 
 void estadoLuces()
@@ -245,6 +252,9 @@ void estadoLuces()
 
 boolean estadoLuz(int valor_der, int valor_izq, int valor_arr, int valor_aba, String luz )
 {
+  tiempoEstabilizacion = 100; //Tiempo para que los sensores LDR se estabilicen
+  startMillis = millis();
+  currentMillis = millis();
   /* Ponemos las luces en los valores determinados por parametro. La led que se probara
    * tendra un valor maximo, mientras que las demas tendran un valor minimo. */
   digitalWrite(ledPin_der, valor_der);  
@@ -257,18 +267,17 @@ boolean estadoLuz(int valor_der, int valor_izq, int valor_arr, int valor_aba, St
   int lecturaSensor2a= analogRead(sensorPin_der); 
   int lecturaSensor3a = analogRead(sensorPin_arr); 
 
-  delay(100); //Tiempo prudencial para estabilizar los sensores LDR
+  if(currentMillis - startMillis < tiempoEstabilizacion)
+  {
+    currentMillis = millis();
+    /* Ponemos a todas las luces en valor minimo */
+    prenderLucesDigital(0);
+    /* Capturamos las nuevas lecturas de los sensores LDR */
+    int lecturaSensor1c = analogRead(sensorPin_izq);
+    int lecturaSensor2c = analogRead(sensorPin_der);
+    int lecturaSensor3c = analogRead(sensorPin_arr);
+  }
 
-  /* Ponemos a todas las luces en valor minimo */
-  prenderLucesDigital(0);
-  
-  /* Capturamos las nuevas lecturas de los sensores LDR */
-  int lecturaSensor1c = analogRead(sensorPin_izq);
-  int lecturaSensor2c = analogRead(sensorPin_der);
-  int lecturaSensor3c = analogRead(sensorPin_arr);
-  
-  delay(100); //Tiempo prudencial para estabilizar los sensores LDR
-  
   /* Si las lecturas cumplen la condicion, la luz funciona. De lo contrario, no funciona */
   if (lecturaSensor1c > lecturaSensor1a  && lecturaSensor2c > lecturaSensor2a && lecturaSensor3c > lecturaSensor3a)
   {

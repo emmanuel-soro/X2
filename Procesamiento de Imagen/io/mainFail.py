@@ -12,11 +12,11 @@ import sys
 
 def procesar_imagen(ruta):
     
-    #Separamos verde
+    #Leemos imagen
     img = cv2.imread(ruta) 
     #Convertimos a hsv 
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-    #El verde se encuentra entre (36,25,25) y (86, 255,255) aprox
+    #Recortamos verde. El verde se encuentra entre (36,25,25) y (86, 255,255) aprox
     mask = cv2.inRange(hsv, (36, 25, 25), (86, 255,255))
     #Sacamos solo lo que no este dentro del rango verde 
     imask = mask>0 
